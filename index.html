@@ -1,0 +1,1193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GPA Calculator</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111a2b;
+      --panel-2: #0f172a;
+      --text: #e7eefc;
+      --muted: #a9b6d3;
+      --border: rgba(231, 238, 252, 0.14);
+      --danger: #ff6b6b;
+      --ok: #68f0a5;
+      --btn: #2a3f72;
+      --btn2: #1c2b4f;
+      --focus: rgba(104, 240, 165, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1000px 600px at 20% 10%, rgba(42, 63, 114, 0.35), transparent 55%),
+                  radial-gradient(900px 500px at 80% 30%, rgba(104, 240, 165, 0.18), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 14px 60px;
+    }
+
+    header { padding: 10px 6px 18px; }
+
+    .topRow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.55rem;
+      letter-spacing: 0.2px;
+    }
+
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .langBox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .langBox label {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .langBox select {
+      width: auto;
+      min-width: 160px;
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.75);
+      color: var(--text);
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 860px) {
+      .grid {
+        grid-template-columns: 1.08fr 0.92fr;
+        align-items: start;
+      }
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      font-weight: 650;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 520px) {
+      .row.two { grid-template-columns: 1fr 1fr; }
+      .row.three { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    [dir="rtl"] .row.three label {
+     min-height: 2.4em;
+     line-height: 1.2;
+     }
+
+    input, select, button {
+      width: 100%;
+      padding: 11px 11px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.75);
+      color: var(--text);
+      outline: none;
+      font-size: 0.98rem;
+    }
+
+    input:focus, select:focus {
+      box-shadow: 0 0 0 4px var(--focus);
+      border-color: rgba(104, 240, 165, 0.55);
+    }
+
+    .hint {
+      margin: 6px 0 0;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .section {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .gradesGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    @media (min-width: 560px) {
+      .gradesGrid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+
+    @media (min-width: 900px) {
+      .gradesGrid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    }
+
+    .gradeBox {
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .gradeBox .small {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .btnRow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    @media (min-width: 520px) {
+      .btnRow { grid-template-columns: 1fr 1fr; }
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: 650;
+      border: 1px solid rgba(231, 238, 252, 0.18);
+    }
+
+    button.primary {
+      background: linear-gradient(180deg, rgba(104, 240, 165, 0.18), rgba(104, 240, 165, 0.08));
+      border-color: rgba(104, 240, 165, 0.35);
+    }
+
+    button.secondary { background: rgba(42, 63, 114, 0.25); }
+
+    .notice {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.55);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .error {
+      border-color: rgba(255, 107, 107, 0.45);
+      color: #ffd0d0;
+      background: rgba(255, 107, 107, 0.08);
+    }
+
+    .ok {
+      border-color: rgba(104, 240, 165, 0.35);
+      color: #d9ffe9;
+      background: rgba(104, 240, 165, 0.08);
+    }
+
+    .resultLine {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(231,238,252,0.10);
+      font-size: 0.98rem;
+    }
+    .resultLine:last-child { border-bottom: none; }
+
+    .mono { font-variant-numeric: tabular-nums; }
+
+    .advice { white-space: pre-line; font-size: 0.98rem; color: var(--text); }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.55);
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
+
+    ul.tips {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    ul.tips li { margin: 6px 0; }
+
+    [dir="rtl"] ul.tips { padding-right: 18px; padding-left: 0; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topRow">
+        <div>
+          <h1 id="tTitle">GPA Calculator</h1>
+          <p class="sub" id="tSubtitle">
+            For University of Jordan students — calculates semester GPA and cumulative GPA.
+          </p>
+        </div>
+
+        <div class="langBox">
+          <label for="lang" id="tLangLabel">Language</label>
+          <select id="lang">
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+          </select>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- INPUTS -->
+      <section class="card">
+        <h2 id="tInputs">Inputs</h2>
+
+        <div class="row two">
+          <div>
+            <label for="h0" id="tH0">Total credit hours in your major</label>
+            <input id="h0" type="number" min="0" step="1" placeholder="Example: 164">
+          </div>
+          <div>
+            <label for="s" id="tS">Current cumulative GPA (0 if none)</label>
+            <input id="s" type="number" min="0" max="4" step="0.01" placeholder="Example: 2.70">
+            <p class="hint" id="tSRange">Allowed range: 0.00 to 4.00</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="h" id="tH">Completed hours (excluding this semester)</label>
+            <input id="h" type="number" min="0" step="1" placeholder="Example: 90">
+            <p class="hint" id="tHHint">Enter 0 if this is your first semester.</p>
+          </div>
+        </div>
+
+        <div class="row three">
+          <div>
+            <label for="i" id="tI">This semester: 3-hour courses count</label>
+            <input id="i" type="number" min="0" step="1" placeholder="Example: 5">
+          </div>
+          <div>
+            <label for="k" id="tK">This semester: 2-hour courses count</label>
+            <input id="k" type="number" min="0" step="1" placeholder="Example: 1">
+          </div>
+          <div>
+            <label for="m" id="tM">This semester: 1-hour courses count</label>
+            <input id="m" type="number" min="0" step="1" placeholder="Example: 2">
+          </div>
+        </div>
+
+        <div class="row two">
+          <div>
+            <label for="repeated" id="tRepeated">Repeated any courses this semester?</label>
+            <select id="repeated">
+              <option value="" id="tSelect">Select...</option>
+              <option value="Y" id="tYes">Yes</option>
+              <option value="N" id="tNo">No</option>
+            </select>
+          </div>
+
+          <div class="notice" style="margin:0;">
+            <span id="tAcceptedGradesLabel">Accepted grades:</span>
+            <span class="pill">A A- B+ B B- C+ C C- D+ D D- F</span>
+          </div>
+        </div>
+
+        <!-- Repeat counts + OLD grades -->
+        <div id="repeatSection" class="section" style="display:none;">
+          <h2 style="margin-top:0;" id="tRepeatedCourses">Repeated courses</h2>
+
+          <div class="row three">
+            <div>
+              <label for="r1" id="tR1">Repeated 3-hour courses count</label>
+              <input id="r1" type="number" min="0" step="1" value="0">
+            </div>
+            <div>
+              <label for="r2" id="tR2">Repeated 2-hour courses count</label>
+              <input id="r2" type="number" min="0" step="1" value="0">
+            </div>
+            <div>
+              <label for="r3" id="tR3">Repeated 1-hour courses count</label>
+              <input id="r3" type="number" min="0" step="1" value="0">
+            </div>
+          </div>
+
+          <div class="notice">
+            <span id="tOldAccepted">Old grades (repeated courses) accepted:</span>
+            <span class="pill">C+ C C- D+ D D- F</span>
+          </div>
+
+          <div class="section">
+            <h2 style="margin-top:0;" id="tOldGradesTitle">OLD grades (repeated courses)</h2>
+            <p class="hint" style="margin-top:-6px;" id="tOldOrder">
+              Order: 3-hour, then 2-hour, then 1-hour.
+            </p>
+
+            <div id="oldGradesContainer" class="gradesGrid"></div>
+          </div>
+        </div>
+
+        <!-- NEW grades -->
+        <div class="section">
+          <h2 style="margin-top:0;" id="tThisSemesterGrades">This semester grades</h2>
+          <p class="hint" style="margin-top:-6px;" id="tNewOrder">
+            Order: 3-hour, then 2-hour, then 1-hour.
+            Include NEW grades for repeated courses.
+          </p>
+          <div id="newGradesContainer" class="gradesGrid"></div>
+        </div>
+
+        <div class="btnRow">
+          <button class="primary" id="btnCalc" type="button">Calculate</button>
+          <button class="secondary" id="btnReset" type="button">Reset</button>
+        </div>
+
+        <div id="message" class="notice" style="display:none;"></div>
+      </section>
+
+      <!-- OUTPUTS -->
+      <section class="card">
+        <h2 id="tResults">Results</h2>
+
+        <div id="resultsBox" class="notice" style="display:none;">
+          <div class="resultLine">
+            <span id="tOutGPA0Label">Current semester GPA</span>
+            <strong class="mono" id="outGPA0">0.00</strong>
+          </div>
+          <div class="resultLine">
+            <span id="tOutGPALabel">Cumulative GPA</span>
+            <strong class="mono" id="outGPA">0.00</strong>
+          </div>
+          <div class="resultLine">
+            <span id="tOutTLabel">Total completed hours</span>
+            <strong class="mono" id="outT">0</strong>
+          </div>
+          <div class="resultLine">
+            <span id="tOutRLabel">Remaining hours</span>
+            <strong class="mono" id="outR">0</strong>
+          </div>
+
+          <!-- NEW: Highest possible cumulative GPA -->
+          <div class="resultLine">
+            <span id="tOutGPAHiLabel">The highest cumulative GPA you can reach</span>
+            <strong class="mono" id="outGPAHi">0.00</strong>
+          </div>
+
+          <div class="resultLine">
+            <span id="tOutGradeLabel">Grade</span>
+            <strong id="outGrade">—</strong>
+          </div>
+        </div>
+
+        <div id="aimSection" class="section" style="display:none;">
+          <h2 style="margin-top:0;" id="tTarget">Target</h2>
+          <div class="row">
+            <div>
+              <label for="aimSelect" id="tAimLabel">Choose your target</label>
+              <select id="aimSelect"></select>
+              <p class="hint" id="aimHint"></p>
+            </div>
+          </div>
+
+          <div id="adviceBox" class="notice ok" style="display:none;">
+            <div class="advice" id="adviceText"></div>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong id="tTipsTitle">Tips</strong>
+          <ul class="tips">
+            <li id="tTip1"></li>
+            <li id="tTip2"></li>
+            <li id="tTip3"></li>
+            <li id="tTip4"></li>
+            <li id="tTip5"></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // ====== LANGUAGE (EN / AR) ======
+    const I18N = {
+      en: {
+        langName: "English",
+        title: "GPA Calculator",
+        subtitle: "For University of Jordan students — calculates semester GPA and cumulative GPA.",
+        langLabel: "Language",
+
+        inputs: "Inputs",
+        results: "Results",
+        target: "Target",
+
+        h0: "Total credit hours in your major",
+        s: "Current cumulative GPA (0 if none)",
+        sRange: "Allowed range: 0.00 to 4.00",
+        h: "Completed hours (excluding this semester)",
+        hHint: "Enter 0 if this is your first semester.",
+        i: "This semester: 3-hour courses count",
+        k: "This semester: 2-hour courses count",
+        m: "This semester: 1-hour courses count",
+        repeated: "Repeated any courses this semester?",
+        select: "Select...",
+        yes: "Yes",
+        no: "No",
+        acceptedGradesLabel: "Accepted grades:",
+
+        repeatedCourses: "Repeated courses",
+        r1: "Repeated 3-hour courses count",
+        r2: "Repeated 2-hour courses count",
+        r3: "Repeated 1-hour courses count",
+        oldAccepted: "Old grades (repeated courses) accepted:",
+        oldGradesTitle: "OLD grades (repeated courses)",
+        oldOrder: "Order: 3-hour, then 2-hour, then 1-hour.",
+
+        thisSemesterGrades: "This semester grades",
+        newOrder:
+          "Order: 3-hour, then 2-hour, then 1-hour.\n" +
+          "Include NEW grades for repeated courses.",
+
+        calculate: "Calculate",
+        reset: "Reset",
+
+        outGPA0Label: "Current semester GPA",
+        outGPALabel: "Cumulative GPA",
+        outTLabel: "Total completed hours",
+        outRLabel: "Remaining hours",
+        outGPAHiLabel: "The highest cumulative GPA you can reach",
+        outGradeLabel: "Grade",
+
+        aimLabel: "Choose your target",
+        aimHintVeryGood: "This estimates the GPA needed for the remaining hours.",
+        aimHintChoose: "Choose the grade you want to reach by graduation.",
+
+        tipsTitle: "Tips",
+        tip1: "Enter your completed hours before this semester. The tool adds this semester hours automatically.",
+        tip2: "If you repeated courses, enter their old grades first, then include their new grades with the semester grades.",
+        tip3: "Do not leave any box empty.",
+        tip4: "GPA values are displayed rounded to 2 decimals, like most university reports.",
+        tip5: "The “highest cumulative GPA” assumes you get 4.00 in all remaining hours.",
+
+        msgInvalid: "Invalid Entry.\nRe-run the program and try again.",
+        msgHoursTooHigh_1: "The number of completed hours is becoming more than ",
+        msgHoursTooHigh_2: ".\nRe-Run the program and try again.",
+        msgSuccess: "Calculated successfully.",
+        msgNeedRepeat: "You likely need to repeat courses.",
+        msgRaiseTo: "Raise cumulative GPA at least to: ",
+        msgThenKeep: "Then keep per-semester GPA = ",
+        msgKeep: "Keep per-semester GPA = ",
+        msgRemainMust: "Remaining hours must be greater than 0 to calculate a target.",
+
+        grade: {
+          EXCELLENT: "Excellent",
+          VERY_GOOD: "Very Good",
+          GOOD: "Good",
+          ACCEPTABLE: "Acceptable",
+          WEAK: "Weak"
+        },
+
+        aim: {
+          select: "Select...",
+          yesWantExcellent: "Excellent",
+          veryGood: "Very Good",
+          excellent: "Excellent",
+          good: "Good",
+          acceptable: "Acceptable"
+        }
+      },
+
+      ar: {
+        langName: "العربية",
+        title: "حاسبة المعدّل",
+        subtitle: "لطلاب الجامعة الأردنية — يقوم بحساب معدل الفصل الدراسي والمعدل التراكمي.",
+        langLabel: "اللغة",
+
+        inputs: "المدخلات",
+        results: "النتائج",
+        target: "الهدف",
+
+        h0: "إجمالي الساعات المطلوبة للتخصص",
+        s: "المعدل التراكمي الحالي (0 إذا لا يوجد)",
+        sRange: "النطاق المسموح: 0.00 إلى 4.00",
+        h: "الساعات المنجزة (بدون هذا الفصل)",
+        hHint: "أدخل 0 إذا كان هذا أول فصل لك.",
+        i: "هذا الفصل: عدد مواد 3 ساعات",
+        k: "هذا الفصل: عدد مواد ساعتين",
+        m: "هذا الفصل: عدد مواد ساعة واحدة",
+        repeated: "هل لديك مواد مُعادة هذا الفصل؟",
+        select: "اختر...",
+        yes: "نعم",
+        no: "لا",
+        acceptedGradesLabel: "العلامات المقبولة:",
+
+        repeatedCourses: "المواد المُعادة",
+        r1: "عدد مواد 3 ساعات المُعادة",
+        r2: "عدد مواد ساعتين المُعادة",
+        r3: "عدد مواد ساعة واحدة المُعادة",
+        oldAccepted: "العلامات القديمة (للمواد المُعادة) المقبولة:",
+        oldGradesTitle: "العلامات القديمة (للمواد المُعادة)",
+        oldOrder: "الترتيب: 3 ساعات، ثم ساعتين، ثم ساعة.",
+
+        thisSemesterGrades: "علامات هذا الفصل",
+        newOrder:
+          "الترتيب: 3 ساعات، ثم ساعتين، ثم ساعة.\n" +
+          "ضمّن العلامات الجديدة للمواد المُعادة.",
+
+        calculate: "احسب",
+        reset: "إعادة ضبط",
+
+        outGPA0Label: "معدل هذا الفصل",
+        outGPALabel: "المعدل التراكمي",
+        outTLabel: "إجمالي الساعات المنجزة",
+        outRLabel: "الساعات المتبقية",
+        outGPAHiLabel: "أعلى معدل تراكمي يمكنك الوصول إليه",
+        outGradeLabel: "التقدير",
+
+        aimLabel: "اختر هدفك",
+        aimHintVeryGood: "هذا تقدير للمعدل المطلوب لباقي الساعات.",
+        aimHintChoose: "اختر التقدير الذي تريد الوصول له عند التخرج.",
+
+        tipsTitle: "نصائح",
+        tip1: "أدخل الساعات المنجزة قبل هذا الفصل. الأداة تضيف ساعات هذا الفصل تلقائياً.",
+        tip2: "إذا لديك مواد مُعادة: أدخل العلامات القديمة أولاً، ثم أدخل العلامات الجديدة ضمن علامات هذا الفصل.",
+        tip3: "لا تترك أي خانة فارغة.",
+        tip4: "يتم عرض المعدل مقرباً إلى منزلتين عشريتين مثل أغلب التقارير.",
+        tip5: "“أعلى معدل تراكمي” يفترض أنك ستحصل على 4.00 في كل الساعات المتبقية.",
+
+        msgInvalid: "إدخال غير صالح.\nأعد تشغيل البرنامج وحاول مرة أخرى.",
+        msgHoursTooHigh_1: "عدد الساعات المنجزة أصبح أكثر من ",
+        msgHoursTooHigh_2: ".\nأعد التشغيل وحاول مرة أخرى.",
+        msgSuccess: "تم الحساب بنجاح.",
+        msgNeedRepeat: "قد تحتاج لإعادة بعض المواد.",
+        msgRaiseTo: "ارفع المعدل التراكمي على الأقل إلى: ",
+        msgThenKeep: "ثم حافظ على معدل فصلي = ",
+        msgKeep: "حافظ على معدل فصلي = ",
+        msgRemainMust: "يجب أن تكون الساعات المتبقية أكبر من 0 لحساب الهدف.",
+
+        grade: {
+          EXCELLENT: "ممتاز",
+          VERY_GOOD: "جيد جداً",
+          GOOD: "جيد",
+          ACCEPTABLE: "مقبول",
+          WEAK: "ضعيف"
+        },
+
+        aim: {
+          select: "اختر...",
+          yesWantExcellent: "ممتاز",
+          veryGood: "جيد جداً",
+          excellent: "ممتاز",
+          good: "جيد",
+          acceptable: "مقبول"
+        }
+      }
+    };
+
+    let currentLang = "en";
+
+    const el = (id) => document.getElementById(id);
+
+    function setLang(lang) {
+      currentLang = I18N[lang] ? lang : "en";
+      const t = I18N[currentLang];
+
+      document.documentElement.lang = currentLang;
+      document.body.dir = (currentLang === "ar") ? "rtl" : "ltr";
+
+      el("tTitle").textContent = t.title;
+      el("tSubtitle").textContent = t.subtitle;
+      el("tLangLabel").textContent = t.langLabel;
+
+      el("tInputs").textContent = t.inputs;
+      el("tResults").textContent = t.results;
+      el("tTarget").textContent = t.target;
+
+      el("tH0").textContent = t.h0;
+      el("tS").textContent = t.s;
+      el("tSRange").textContent = t.sRange;
+      el("tH").textContent = t.h;
+      el("tHHint").textContent = t.hHint;
+      el("tI").textContent = t.i;
+      el("tK").textContent = t.k;
+      el("tM").textContent = t.m;
+      el("tRepeated").textContent = t.repeated;
+
+      el("tSelect").textContent = t.select;
+      el("tYes").textContent = t.yes;
+      el("tNo").textContent = t.no;
+
+      el("tAcceptedGradesLabel").textContent = t.acceptedGradesLabel;
+
+      el("tRepeatedCourses").textContent = t.repeatedCourses;
+      el("tR1").textContent = t.r1;
+      el("tR2").textContent = t.r2;
+      el("tR3").textContent = t.r3;
+      el("tOldAccepted").textContent = t.oldAccepted;
+      el("tOldGradesTitle").textContent = t.oldGradesTitle;
+      el("tOldOrder").textContent = t.oldOrder;
+
+      el("tThisSemesterGrades").textContent = t.thisSemesterGrades;
+      el("tNewOrder").textContent = t.newOrder;
+
+      el("btnCalc").textContent = t.calculate;
+      el("btnReset").textContent = t.reset;
+
+      el("tOutGPA0Label").textContent = t.outGPA0Label;
+      el("tOutGPALabel").textContent = t.outGPALabel;
+      el("tOutTLabel").textContent = t.outTLabel;
+      el("tOutRLabel").textContent = t.outRLabel;
+      el("tOutGPAHiLabel").textContent = t.outGPAHiLabel;
+      el("tOutGradeLabel").textContent = t.outGradeLabel;
+
+      el("tAimLabel").textContent = t.aimLabel;
+
+      el("tTipsTitle").textContent = t.tipsTitle;
+      el("tTip1").innerHTML = t.tip1;
+      el("tTip2").innerHTML = t.tip2;
+      el("tTip3").innerHTML = t.tip3;
+      el("tTip4").innerHTML = t.tip4;
+      el("tTip5").innerHTML = t.tip5;
+
+      const resultsVisible = el("resultsBox").style.display !== "none";
+      if (resultsVisible && window.__lastState) setupAimUI(window.__lastState);
+
+      localStorage.setItem("lang", currentLang);
+    }
+
+    function showMessage(text, isError) {
+      const box = el("message");
+      box.style.display = "block";
+      box.textContent = text;
+      box.classList.toggle("error", !!isError);
+      box.classList.toggle("ok", !isError);
+    }
+
+    function clearMessage() {
+      const box = el("message");
+      box.style.display = "none";
+      box.textContent = "";
+      box.classList.remove("error", "ok");
+    }
+
+    function invalidEntry() {
+      const t = I18N[currentLang] || I18N.en;
+      showMessage(t.msgInvalid, true);
+    }
+
+    // ====== GRADE TABLE ======
+    const gradePoints = new Map([
+      ["A", 4.00],
+      ["A-", 3.75],
+      ["B+", 3.50],
+      ["B", 3.00],
+      ["B-", 2.75],
+      ["C+", 2.50],
+      ["C", 2.00],
+      ["C-", 1.75],
+      ["D+", 1.50],
+      ["D", 1.25],
+      ["D-", 1.00],
+      ["F", 0.50]
+    ]);
+
+    function normalizeGrade(s) {
+      return String(s || "").trim().toUpperCase();
+    }
+
+    function score(g) {
+      const key = normalizeGrade(g);
+      return gradePoints.has(key) ? gradePoints.get(key) : 0.00;
+    }
+
+    function isValidOldRepeatedGrade(g) {
+      const x = normalizeGrade(g);
+      return (
+        x === "C+" || x === "C" || x === "C-" ||
+        x === "D+" || x === "D" || x === "D-" ||
+        x === "F"
+      );
+    }
+
+    function isValidAnyGrade(g) {
+      return gradePoints.has(normalizeGrade(g));
+    }
+
+    // ====== MATH HELPERS ======
+    function round2(x) { return Math.round(x * 100.0) / 100.0; }
+    function fmt2(x) { return Number(x).toFixed(2); }
+
+    // NEW: Highest possible cumulative GPA (assumes 4.00 in remaining hours)
+    function highestPossibleCumulativeGPA(N, R, h0) {
+      let GPAHi = (N + 4.00 * R) / h0;
+      GPAHi = round2(GPAHi);
+      return GPAHi;
+    }
+
+    // ====== UI HELPERS ======
+    function createGradeInput(labelText, placeholder) {
+      const wrap = document.createElement("div");
+      wrap.className = "gradeBox";
+
+      const small = document.createElement("div");
+      small.className = "small";
+      small.textContent = labelText;
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.placeholder = placeholder || "e.g. A-";
+      input.autocomplete = "off";
+      input.spellcheck = false;
+
+      wrap.appendChild(small);
+      wrap.appendChild(input);
+      return { wrap, input };
+    }
+
+    function toInt(v) {
+      if (v === "" || v === null || v === undefined) return null;
+      const n = Number(v);
+      if (!Number.isFinite(n)) return null;
+      if (!Number.isInteger(n)) return null;
+      if (n < 0) return null;
+      return n;
+    }
+
+    function toNumber(v) {
+      if (v === "" || v === null || v === undefined) return null;
+      const n = Number(v);
+      if (!Number.isFinite(n)) return null;
+      return n;
+    }
+
+    function readGradeInputs(kind) {
+      const cont = (kind === "old") ? el("oldGradesContainer") : el("newGradesContainer");
+      return Array.from(cont.querySelectorAll("input")).map(x => x.value);
+    }
+
+    function rebuildGradeInputs() {
+      const i = toInt(el("i").value);
+      const k = toInt(el("k").value);
+      const m = toInt(el("m").value);
+      if (i === null || k === null || m === null) return;
+
+      const newCont = el("newGradesContainer");
+      newCont.innerHTML = "";
+
+      for (let idx = 1; idx <= (i + k + m); idx++) {
+        const label = (currentLang === "ar") ? `العلامة ${idx}` : `Grade ${idx}`;
+        const placeholder = "A / B+ / C- ...";
+        const { wrap, input } = createGradeInput(label, placeholder);
+        input.dataset.kind = "new";
+        newCont.appendChild(wrap);
+      }
+
+      const repeated = el("repeated").value;
+      if (repeated === "Y") {
+        const r1 = toInt(el("r1").value);
+        const r2 = toInt(el("r2").value);
+        const r3 = toInt(el("r3").value);
+        if (r1 === null || r2 === null || r3 === null) return;
+
+        const oldCont = el("oldGradesContainer");
+        oldCont.innerHTML = "";
+
+        for (let idx = 1; idx <= (r1 + r2 + r3); idx++) {
+          const label = (currentLang === "ar") ? `العلامة القديمة ${idx}` : `Old Grade ${idx}`;
+          const placeholder = "C / D+ / F";
+          const { wrap, input } = createGradeInput(label, placeholder);
+          input.dataset.kind = "old";
+          oldCont.appendChild(wrap);
+        }
+      } else {
+        el("oldGradesContainer").innerHTML = "";
+      }
+    }
+
+    function setupAimUI(state) {
+      const t = I18N[currentLang] || I18N.en;
+
+      const aimSection = el("aimSection");
+      const aimSelect = el("aimSelect");
+      const aimHint = el("aimHint");
+      const adviceBox = el("adviceBox");
+      const adviceText = el("adviceText");
+
+      aimSelect.innerHTML = "";
+      adviceBox.style.display = "none";
+      adviceText.textContent = "";
+      aimHint.textContent = "";
+
+      const GPA = state.GPA;
+
+      if (GPA >= 3.65 && GPA <= 4.00) {
+        aimSection.style.display = "none";
+        return;
+      }
+
+      aimSection.style.display = "block";
+
+      let options = [];
+
+      if (GPA >= 3.00 && GPA <= 3.64) {
+        options = [
+          { value: "", label: t.aim.select },
+          { value: "EXCELLENT_Y", label: t.aim.yesWantExcellent },
+        ];
+        aimHint.textContent = t.aimHintVeryGood;
+      } else if (GPA >= 2.50 && GPA <= 2.99) {
+        options = [
+          { value: "", label: t.aim.select },
+          { value: "GOOD_A", label: t.aim.veryGood },
+          { value: "GOOD_B", label: t.aim.excellent }
+        ];
+        aimHint.textContent = t.aimHintChoose;
+      } else if (GPA >= 2.00 && GPA <= 2.49) {
+        options = [
+          { value: "", label: t.aim.select },
+          { value: "ACC_A", label: t.aim.good },
+          { value: "ACC_B", label: t.aim.veryGood },
+          { value: "ACC_C", label: t.aim.excellent }
+        ];
+        aimHint.textContent = t.aimHintChoose;
+      } else {
+        options = [
+          { value: "", label: t.aim.select },
+          { value: "WEAK_A", label: t.aim.acceptable },
+          { value: "WEAK_B", label: t.aim.good },
+          { value: "WEAK_C", label: t.aim.veryGood },
+          { value: "WEAK_D", label: t.aim.excellent }
+        ];
+        aimHint.textContent = t.aimHintChoose;
+      }
+
+      for (const opt of options) {
+        const o = document.createElement("option");
+        o.value = opt.value;
+        o.textContent = opt.label;
+        aimSelect.appendChild(o);
+      }
+
+      aimSelect.onchange = () => {
+        adviceBox.style.display = "none";
+        adviceText.textContent = "";
+
+        const choice = aimSelect.value;
+        if (!choice) return;
+
+        if (!(state.R > 0)) {
+          adviceText.textContent = t.msgRemainMust;
+          adviceBox.style.display = "block";
+          adviceBox.classList.add("error");
+          adviceBox.classList.remove("ok");
+          return;
+        }
+
+        const targets = {
+          ACCEPTABLE: 2.01,
+          GOOD: 2.51,
+          VERY_GOOD: 3.01,
+          EXCELLENT: 3.66
+        };
+
+        let target = null;
+
+        if (choice === "EXCELLENT_Y") target = targets.EXCELLENT;
+
+        if (choice === "GOOD_A") target = targets.VERY_GOOD;
+        if (choice === "GOOD_B") target = targets.EXCELLENT;
+
+        if (choice === "ACC_A") target = targets.GOOD;
+        if (choice === "ACC_B") target = targets.VERY_GOOD;
+        if (choice === "ACC_C") target = targets.EXCELLENT;
+
+        if (choice === "WEAK_A") target = targets.ACCEPTABLE;
+        if (choice === "WEAK_B") target = targets.GOOD;
+        if (choice === "WEAK_C") target = targets.VERY_GOOD;
+        if (choice === "WEAK_D") target = targets.EXCELLENT;
+
+        let N = state.N;
+        const T = state.T;
+        const R = state.R;
+        const h0 = state.h0;
+
+        let x = (target * h0 - N) / R;
+
+        if (x > 4.00) {
+          const e = (x - 4.00) * R;
+          N += e;
+          const newGPA = N / T;
+
+          const x2 = (target * h0 - N) / R;
+
+          adviceText.textContent =
+            t.msgNeedRepeat + "\n" +
+            t.msgRaiseTo + fmt2(newGPA) + "\n" +
+            t.msgThenKeep + fmt2(x2);
+        } else {
+          adviceText.textContent = t.msgKeep + fmt2(x);
+        }
+
+        adviceBox.style.display = "block";
+        adviceBox.classList.remove("error");
+        adviceBox.classList.add("ok");
+      };
+    }
+
+    function calc() {
+      clearMessage();
+      const t = I18N[currentLang] || I18N.en;
+
+      const h0 = toInt(el("h0").value);
+      const s  = toNumber(el("s").value);
+      const h  = toInt(el("h").value);
+      const i  = toInt(el("i").value);
+      const k  = toInt(el("k").value);
+      const m  = toInt(el("m").value);
+      const repeated = el("repeated").value;
+
+      if (h0 === null || s === null || h === null || i === null || k === null || m === null) {
+        invalidEntry();
+        return;
+      }
+
+      if (s > 4.00 || s < 0.00) {
+        invalidEntry();
+        return;
+      }
+
+      if (repeated !== "Y" && repeated !== "N") {
+        invalidEntry();
+        return;
+      }
+
+      let r0 = 0.00;
+      let p0 = 0;
+      let r1 = 0, r2 = 0, r3 = 0;
+
+      if (repeated === "Y") {
+        r1 = toInt(el("r1").value);
+        r2 = toInt(el("r2").value);
+        r3 = toInt(el("r3").value);
+
+        if (r1 === null || r2 === null || r3 === null) {
+          invalidEntry();
+          return;
+        }
+
+        const oldGrades = readGradeInputs("old");
+        if (oldGrades.length !== (r1 + r2 + r3)) {
+          invalidEntry();
+          return;
+        }
+
+        for (let idx = 0; idx < r1; idx++) {
+          const g = oldGrades[idx];
+          if (!isValidOldRepeatedGrade(g)) { invalidEntry(); return; }
+          r0 += 3.0 * score(g);
+        }
+
+        for (let idx = r1; idx < r1 + r2; idx++) {
+          const g = oldGrades[idx];
+          if (!isValidOldRepeatedGrade(g)) { invalidEntry(); return; }
+          r0 += 2.0 * score(g);
+        }
+
+        for (let idx = r1 + r2; idx < r1 + r2 + r3; idx++) {
+          const g = oldGrades[idx];
+          if (!isValidOldRepeatedGrade(g)) { invalidEntry(); return; }
+          r0 += score(g);
+        }
+
+        p0 = 3 * r1 + 2 * r2 + r3;
+      }
+
+      const newGrades = readGradeInputs("new");
+      if (newGrades.length !== (i + k + m)) {
+        invalidEntry();
+        return;
+      }
+
+      let r = 0.00;
+
+      for (let idx = 0; idx < i; idx++) {
+        const g = newGrades[idx];
+        if (!isValidAnyGrade(g)) { invalidEntry(); return; }
+        r += 3.0 * score(g);
+      }
+
+      for (let idx = i; idx < i + k; idx++) {
+        const g = newGrades[idx];
+        if (!isValidAnyGrade(g)) { invalidEntry(); return; }
+        r += 2.0 * score(g);
+      }
+
+      for (let idx = i + k; idx < i + k + m; idx++) {
+        const g = newGrades[idx];
+        if (!isValidAnyGrade(g)) { invalidEntry(); return; }
+        r += score(g);
+      }
+
+      const N = h * s + r - r0;
+      const T = h + 3 * i + 2 * k + m - p0;
+
+      const denomSemester = (T - h + p0);
+      if (!(denomSemester > 0)) {
+        invalidEntry();
+        return;
+      }
+
+      let GPA0 = (r) / denomSemester;
+      GPA0 = round2(GPA0);
+
+      if (T > h0) {
+        showMessage(t.msgHoursTooHigh_1 + h0 + t.msgHoursTooHigh_2, true);
+        return;
+      }
+
+      const R = h0 - T;
+
+      let GPA = N / T;
+      GPA = round2(GPA);
+
+      // NEW: GPAHi
+      const GPAHi = highestPossibleCumulativeGPA(N, R, h0);
+
+      el("resultsBox").style.display = "block";
+      el("outGPA0").textContent = fmt2(GPA0);
+      el("outGPA").textContent = fmt2(GPA);
+      el("outT").textContent = String(T);
+      el("outR").textContent = String(R);
+      el("outGPAHi").textContent = fmt2(GPAHi);
+
+      let gradeKey = "WEAK";
+      if (GPA >= 3.65 && GPA <= 4.00) gradeKey = "EXCELLENT";
+      else if (GPA >= 3.00 && GPA <= 3.64) gradeKey = "VERY_GOOD";
+      else if (GPA >= 2.50 && GPA <= 2.99) gradeKey = "GOOD";
+      else if (GPA >= 2.00 && GPA <= 2.49) gradeKey = "ACCEPTABLE";
+      else gradeKey = "WEAK";
+
+      el("outGrade").textContent = t.grade[gradeKey];
+
+      const state = { GPA, N, T, R, h0 };
+      window.__lastState = state;
+      setupAimUI(state);
+
+      showMessage(t.msgSuccess, false);
+    }
+
+    function resetAll() {
+      clearMessage();
+
+      ["h0","s","h","i","k","m","r1","r2","r3"].forEach(id => {
+        const node = el(id);
+        if (!node) return;
+        if (id === "r1" || id === "r2" || id === "r3") node.value = "0";
+        else node.value = "";
+      });
+
+      el("repeated").value = "";
+
+      el("repeatSection").style.display = "none";
+      el("oldGradesContainer").innerHTML = "";
+      el("newGradesContainer").innerHTML = "";
+
+      el("resultsBox").style.display = "none";
+      el("aimSection").style.display = "none";
+      el("adviceBox").style.display = "none";
+      el("adviceText").textContent = "";
+
+      window.__lastState = null;
+      rebuildGradeInputs();
+    }
+
+    function handleRepeatedChange() {
+      const rep = el("repeated").value;
+      el("repeatSection").style.display = (rep === "Y") ? "block" : "none";
+      rebuildGradeInputs();
+    }
+
+    ["i","k","m","r1","r2","r3"].forEach(id => {
+      const node = el(id);
+      if (node) node.addEventListener("input", rebuildGradeInputs);
+    });
+
+    el("repeated").addEventListener("change", handleRepeatedChange);
+    el("btnCalc").addEventListener("click", calc);
+    el("btnReset").addEventListener("click", resetAll);
+
+    el("lang").addEventListener("change", (e) => {
+      setLang(e.target.value);
+      rebuildGradeInputs();
+    });
+
+    (function initLang() {
+      const saved = localStorage.getItem("lang");
+      const nav = (navigator.language || "").toLowerCase();
+
+      let initial = "en";
+      if (saved && I18N[saved]) initial = saved;
+      else if (nav.startsWith("ar")) initial = "ar";
+
+      el("lang").value = initial;
+      setLang(initial);
+      rebuildGradeInputs();
+    })();
+  </script>
+</body>
+</html>
