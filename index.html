@@ -825,7 +825,7 @@
 
         <div class="field">
           <label for="s" id="tS">Current cumulative GPA (0 if none)</label>
-          <input id="s" type="number" min="0" max="4" step="0.01" placeholder="Example: 2.70">
+          <input id="s" type="number" min="0" max="4" step="0.01" placeholder="Example: 3.00">
           <p class="hint" id="tSRange">Allowed range: 0.00 to 4.00</p>
         </div>
 
@@ -946,8 +946,7 @@
         h0: "Total credit hours in your major",
         s: "Current cumulative GPA (0 if none)",
         sRange: "Allowed range: 0.00 to 4.00",
-        h: "Completed hours (excluding this semester)",
-        hHint: "Enter 0 if this is your first semester.",
+        h: "Cumulative hours (0 if none)",
         thisSemesterCourses: "This semester courses",
         creditsHeader: "Credits",
         gradeHeader: "Grade",
@@ -972,7 +971,7 @@
         aimHintChoose: "Choose the grade you want to reach by graduation.",
 
         tipsTitle: "Tips",
-        tip1: "Enter your completed hours before this semester. The tool adds this semester hours automatically.",
+        tip1: "Enter your cumulative hours before this semester. The tool adds this semester hours automatically.",
         tip2: "If you repeated courses, mark them and select the old grade that will be replaced.",
         tip3: "Use your official study plan for total credit hours.",
         tip4: "GPA values are rounded to 2 decimals like university reports.",
@@ -1037,7 +1036,7 @@
 
         outGPA0Label: "معدل هذا الفصل",
         outGPALabel: "المعدل التراكمي",
-        outTLabel: "إجمالي الساعات المنجزة",
+        outTLabel: "الساعات التراكمية",
         outRLabel: "الساعات المتبقية",
         outGPAHiLabel: "أعلى معدل ممكن",
         outGradeLabel: "التقدير",
@@ -1047,7 +1046,7 @@
         aimHintChoose: "اختر التقدير الذي تريد الوصول له عند التخرج.",
 
         tipsTitle: "نصائح",
-        tip1: "أدخل الساعات المنجزة قبل هذا الفصل. الأداة تضيف ساعات هذا الفصل تلقائياً.",
+        tip1: "أدخل الساعات التراكمية قبل هذا الفصل. الأداة تضيف ساعات هذا الفصل تلقائياً.",
         tip2: "إذا لديك مواد مُعادة: حددها واختر العلامة القديمة التي سيتم استبدالها.",
         tip3: "استخدم خطتك الدراسية الرسمية لإجمالي الساعات.",
         tip4: "يتم عرض المعدل مقرباً إلى منزلتين عشريتين مثل أغلب التقارير.",
@@ -1260,7 +1259,7 @@
       const s = parseFloat(el("s").value);
 
       // Validate basic inputs
-      if (!h0 || h0 < 0 || !h || h < 0 || s < 0 || s > 4 || isNaN(s)) {
+      if (!h0 || h0 < 0 || h < 0 || s < 0 || s > 4 || isNaN(s)) {
         showMessage(t.msgInvalid, true);
         return;
       }
