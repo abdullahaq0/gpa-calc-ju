@@ -12,8 +12,8 @@
   <style>
     :root {
       --bg: #0b1220;
-      --panel: #111a2b;
-      --panel-2: #0f172a;
+      --panel: #0e1b33;
+      --panel2: #0a1426;
       --text: #e7eefc;
       --muted: #a9b6d3;
       --border: rgba(231, 238, 252, 0.14);
@@ -29,119 +29,89 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1000px 600px at 20% 10%, rgba(42, 63, 114, 0.35), transparent 55%),
-                  radial-gradient(900px 500px at 80% 30%, rgba(104, 240, 165, 0.18), transparent 60%),
-                  var(--bg);
+      background: radial-gradient(circle at 20% 10%, #0f2748, #060b16 60%);
       color: var(--text);
       line-height: 1.45;
     }
 
-    .wrap {
-      max-width: 980px;
+    .wrapper {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 24px 14px 60px;
+      padding: 24px;
     }
 
-    header { padding: 10px 6px 18px; }
-
-    .topRow {
+    header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      align-items: flex-start;
+      gap: 20px;
       flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
     h1 {
-      margin: 0 0 6px;
-      font-size: 1.55rem;
-      letter-spacing: 0.2px;
+      margin: 0 0 6px 0;
+      font-size: 1.8rem;
     }
 
     .sub {
-      margin: 0;
       color: var(--muted);
+      margin: 0;
       font-size: 0.98rem;
     }
 
     .langBox {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      min-width: 240px;
     }
 
     .langBox label {
-      margin: 0;
-      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 8px;
       color: var(--muted);
-    }
-
-    .langBox select {
-      width: auto;
-      min-width: 160px;
-      padding: 9px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.75);
-      color: var(--text);
-      outline: none;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      margin-top: 10px;
     }
 
-    @media (min-width: 860px) {
+    @media (max-width: 900px) {
       .grid {
-        grid-template-columns: 1.08fr 0.92fr;
-        align-items: start;
+        grid-template-columns: 1fr;
       }
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      background: linear-gradient(180deg, #0e1b33, #0a1426);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: 16px;
+      padding: 22px;
       box-shadow: 0 10px 28px rgba(0,0,0,0.22);
     }
 
     .card h2 {
-      margin: 0 0 10px;
-      font-size: 1.05rem;
-      font-weight: 650;
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 1.25rem;
     }
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    @media (min-width: 520px) {
-      .row.two { grid-template-columns: 1fr 1fr; }
-      .row.three { grid-template-columns: 1fr 1fr 1fr; }
+    .field {
+      margin-bottom: 24px;
     }
 
     label {
       display: block;
-      font-size: 0.9rem;
+      margin-bottom: 8px;
       color: var(--muted);
-      margin-bottom: 6px;
+      font-size: 0.92rem;
     }
-
-    [dir="rtl"] .row.three label {
-     min-height: 2.4em;
-     line-height: 1.2;
-     }
 
     input, select, button {
       width: 100%;
-      padding: 11px 11px;
+      padding: 12px 14px;
       border-radius: 10px;
       border: 1px solid var(--border);
       background: rgba(15, 23, 42, 0.75);
@@ -155,60 +125,71 @@
       border-color: rgba(104, 240, 165, 0.55);
     }
 
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
     .hint {
-      margin: 6px 0 0;
+      margin: 8px 0 0;
       font-size: 0.86rem;
       color: var(--muted);
     }
 
-    .section {
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
+    /* Course Input Section */
+    .courses-section {
+      margin-top: 24px;
     }
 
-    .gradesGrid {
+    .course-header {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 10px;
-    }
-
-    @media (min-width: 560px) {
-      .gradesGrid { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    }
-
-    @media (min-width: 900px) {
-      .gradesGrid { grid-template-columns: repeat(4, minmax(0,1fr)); }
-    }
-
-    .gradeBox {
-      padding: 10px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.5);
-    }
-
-    .gradeBox .small {
-      font-size: 0.82rem;
+      grid-template-columns: 110px 1fr 110px 1fr 44px;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 0 4px;
       color: var(--muted);
-      margin-bottom: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
     }
 
-    .btnRow {
+    .course-row {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 12px;
+      grid-template-columns: 110px 1fr 110px 1fr 44px;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: center;
     }
 
-    @media (min-width: 520px) {
-      .btnRow { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 900px) {
+      .course-header, .course-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      
+      .course-header > div:nth-child(n+4),
+      .course-row > *:nth-child(n+4) {
+        display: none;
+      }
+    }
+
+    .course-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
     }
 
     button {
       cursor: pointer;
       font-weight: 650;
       border: 1px solid rgba(231, 238, 252, 0.18);
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     button.primary {
@@ -216,256 +197,737 @@
       border-color: rgba(104, 240, 165, 0.35);
     }
 
-    button.secondary { background: rgba(42, 63, 114, 0.25); }
+    button.secondary {
+      background: rgba(42, 63, 114, 0.25);
+    }
 
-    .notice {
-      margin-top: 10px;
-      padding: 10px 12px;
+    button.danger {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      color: #ffb4b4;
+      font-size: 1.2rem;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* Results Section */
+    .results-card {
+      position: sticky;
+      top: 20px;
+    }
+
+    .result-box {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .result-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(231, 238, 252, 0.1);
+      font-size: 0.98rem;
+    }
+
+    .result-line:last-child {
+      border-bottom: none;
+    }
+
+    .result-value {
+      font-size: 1.1rem;
+      font-weight: 650;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .grade-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(104, 240, 165, 0.15);
+      border: 1px solid rgba(104, 240, 165, 0.3);
+      color: #a8ffd1;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Target Section */
+    .target-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .advice-box {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(104, 240, 165, 0.35);
+      background: rgba(104, 240, 165, 0.08);
+      color: #d9ffe9;
+      font-size: 0.92rem;
+      white-space: pre-line;
+      display: none;
+    }
+
+    .advice-box.error {
+      border-color: rgba(255, 107, 107, 0.45);
+      background: rgba(255, 107, 107, 0.08);
+      color: #ffd0d0;
+    }
+
+    /* Tips Box */
+    .tipbox {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 20px;
+    }
+
+    .tipbox h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .tipbox ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .tipbox li {
+      margin: 8px 0;
+      font-size: 0.92rem;
+    }
+
+    /* Message Box */
+    .message-box {
+      margin-top: 20px;
+      padding: 14px;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: rgba(15, 23, 42, 0.55);
       color: var(--muted);
       font-size: 0.92rem;
+      display: none;
     }
 
-    .error {
-      border-color: rgba(255, 107, 107, 0.45);
-      color: #ffd0d0;
-      background: rgba(255, 107, 107, 0.08);
-    }
-
-    .ok {
+    .message-box.success {
       border-color: rgba(104, 240, 165, 0.35);
       color: #d9ffe9;
       background: rgba(104, 240, 165, 0.08);
     }
 
-    .resultLine {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 9px 0;
-      border-bottom: 1px solid rgba(231,238,252,0.10);
-      font-size: 0.98rem;
+    .message-box.error {
+      border-color: rgba(255, 107, 107, 0.45);
+      color: #ffd0d0;
+      background: rgba(255, 107, 107, 0.08);
     }
-    .resultLine:last-child { border-bottom: none; }
 
-    .mono { font-variant-numeric: tabular-nums; }
-
-    .advice { white-space: pre-line; font-size: 0.98rem; color: var(--text); }
-
-    .pill {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.55);
+    /* Footer */
+    .site-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(231, 238, 252, 0.1);
       color: var(--muted);
-      font-size: 0.85rem;
-      margin-top: 6px;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
     }
 
-    ul.tips {
-      margin: 8px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
+    .site-footer:hover {
+      opacity: 1;
     }
-    ul.tips li { margin: 6px 0; }
 
-    [dir="rtl"] ul.tips { padding-right: 18px; padding-left: 0; }
+    /* RTL Support */
+    [dir="rtl"] .tipbox ul {
+      padding-right: 18px;
+      padding-left: 0;
+    }
+    
+    [dir="rtl"] .course-row select {
+      text-align: right;
+    }
+    
+    [dir="rtl"] .course-header {
+      text-align: center;
+    }
+    
+    [dir="rtl"] .course-header > div {
+      text-align: center;
+    }
+
+    /* ====== MOBILE-SPECIFIC STYLES ====== */
+    @media (max-width: 600px) {
+      .wrapper {
+        padding: 16px;
+      }
+      
+      header {
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+      
+      .langBox {
+        min-width: 100%;
+        width: 100%;
+      }
+      
+      h1 {
+        font-size: 1.6rem;
+      }
+      
+      .sub {
+        font-size: 0.9rem;
+      }
+      
+      .card {
+        padding: 18px;
+        border-radius: 14px;
+      }
+      
+      .row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .field {
+        margin-bottom: 20px;
+      }
+      
+      input, select, button {
+        padding: 14px 16px;
+        font-size: 1rem;
+      }
+      
+      .course-actions {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      
+      .actions {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      
+      /* MOBILE COURSE LAYOUT - FIXED: 5 columns with proper alignment */
+      .course-header {
+        display: grid;
+        /* Reduced width for first three columns by 10% */
+        grid-template-columns: 0.9fr 0.9fr 0.9fr 1.1fr 44px;
+        gap: 6px;
+        margin-bottom: 8px;
+        padding: 0;
+        font-size: 0.7rem;
+        text-align: center;
+      }
+      
+      /* Show all headers on mobile */
+      .course-header > div:nth-child(1),
+      .course-header > div:nth-child(2),
+      .course-header > div:nth-child(3),
+      .course-header > div:nth-child(4) {
+        display: block;
+      }
+      
+      .course-header > div:nth-child(5) {
+        display: block;
+        visibility: hidden;
+      }
+      
+      .course-row {
+        display: grid;
+        /* Reduced width for first three columns by 10% */
+        grid-template-columns: 0.9fr 0.9fr 0.9fr 1.1fr 44px;
+        gap: 6px;
+        margin-bottom: 12px;
+        align-items: center;
+        position: relative;
+        background: rgba(15, 23, 42, 0.25);
+        border-radius: 10px;
+        padding: 8px;
+        border: 1px solid rgba(231, 238, 252, 0.08);
+      }
+      
+      /* Show all columns on mobile */
+      .course-row > *:nth-child(1),
+      .course-row > *:nth-child(2),
+      .course-row > *:nth-child(3),
+      .course-row > *:nth-child(4),
+      .course-row > *:nth-child(5) {
+        display: block;
+      }
+      
+      /* Arrange the grid items */
+      .course-row > *:nth-child(1) { /* Credits select */
+        grid-column: 1;
+        grid-row: 1;
+      }
+      
+      .course-row > *:nth-child(2) { /* Grade select */
+        grid-column: 2;
+        grid-row: 1;
+      }
+      
+      .course-row > *:nth-child(3) { /* Repeated? select */
+        grid-column: 3;
+        grid-row: 1;
+        width: 100%;
+      }
+      
+      .course-row > *:nth-child(4) { /* Old Grade select */
+        grid-column: 4;
+        grid-row: 1;
+        width: 100%;
+      }
+      
+      /* DELETE BUTTON */
+      .course-row > *:nth-child(5) {
+        grid-column: 5;
+        grid-row: 1;
+        width: 100%;
+        height: 42px;
+        background: rgba(255, 107, 107, 0.15);
+        border: 1px solid rgba(255, 107, 107, 0.3);
+        color: #ffb4b4;
+        font-size: 1rem;
+        border-radius: 8px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: auto;
+        transition: all 0.2s ease;
+      }
+      
+      /* Make all selects have consistent height and smaller font */
+      .course-row select {
+        height: 42px;
+        padding: 8px 4px;
+        font-size: 0.75rem;
+      }
+      
+      /* Make the selects more compact */
+      .course-row .repeated-select,
+      .course-row .old-grade-select {
+        font-size: 0.7rem;
+      }
+      
+      /* FIXED: RTL ARABIC HEADING ALIGNMENT - Keep same layout but adjust text alignment */
+      [dir="rtl"] .course-header {
+        /* Same grid layout with reduced widths */
+        grid-template-columns: 0.9fr 0.9fr 0.9fr 1.1fr 44px;
+      }
+      
+      [dir="rtl"] .course-row {
+        /* Same grid layout with reduced widths */
+        grid-template-columns: 0.9fr 0.9fr 0.9fr 1.1fr 44px;
+      }
+      
+      /* CRITICAL FIX: All headers stay in same position, just centered text */
+      [dir="rtl"] .course-header > div:nth-child(1) { /* Credits header */
+        grid-column: 1;
+        text-align: center;
+      }
+      
+      [dir="rtl"] .course-header > div:nth-child(2) { /* Grade header */
+        grid-column: 2;
+        text-align: center;
+      }
+      
+      [dir="rtl"] .course-header > div:nth-child(3) { /* Repeated? header */
+        grid-column: 3;
+        text-align: center;
+      }
+      
+      [dir="rtl"] .course-header > div:nth-child(4) { /* Old Grade header */
+        grid-column: 4;
+        text-align: center;
+      }
+      
+      [dir="rtl"] .course-header > div:nth-child(5) { /* Empty for delete */
+        grid-column: 5;
+        text-align: center;
+        visibility: hidden;
+      }
+      
+      /* All inputs stay in same position */
+      [dir="rtl"] .course-row > *:nth-child(1) { /* Credits select stays in column 1 */
+        grid-column: 1;
+      }
+      
+      [dir="rtl"] .course-row > *:nth-child(2) { /* Grade select stays in column 2 */
+        grid-column: 2;
+      }
+      
+      [dir="rtl"] .course-row > *:nth-child(3) { /* Repeated? select stays in column 3 */
+        grid-column: 3;
+      }
+      
+      [dir="rtl"] .course-row > *:nth-child(4) { /* Old Grade select stays in column 4 */
+        grid-column: 4;
+      }
+      
+      [dir="rtl"] .course-row > *:nth-child(5) { /* Delete button stays in column 5 */
+        grid-column: 5;
+      }
+      
+      /* Ensure RTL selects have proper text alignment */
+      [dir="rtl"] .course-row select {
+        text-align: right;
+        font-size: 0.75rem;
+        padding: 8px 4px;
+      }
+      
+      .result-box {
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      
+      .result-line {
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 0;
+      }
+      
+      .result-value {
+        font-size: 1.2rem;
+      }
+      
+      .tipbox {
+        padding: 16px;
+        margin-top: 16px;
+      }
+      
+      .tipbox li {
+        font-size: 0.9rem;
+        margin: 6px 0;
+      }
+      
+      .target-section {
+        margin-top: 16px;
+        padding-top: 16px;
+      }
+      
+      .message-box {
+        margin-top: 16px;
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+      
+      .advice-box {
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+      
+      /* Improve button tap targets for mobile */
+      button {
+        min-height: 48px;
+      }
+      
+      .site-footer {
+        margin-top: 30px;
+        padding-top: 16px;
+        font-size: 0.75rem;
+      }
+    }
+    
+    /* Extra small devices (phones under 400px) */
+    @media (max-width: 400px) {
+      .wrapper {
+        padding: 12px;
+      }
+      
+      .card {
+        padding: 16px;
+      }
+      
+      h1 {
+        font-size: 1.4rem;
+      }
+      
+      .card h2 {
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+      }
+      
+      .course-header {
+        /* Further reduced for very small screens */
+        grid-template-columns: 0.85fr 0.85fr 0.85fr 1.15fr 40px;
+        gap: 4px;
+        font-size: 0.65rem;
+      }
+      
+      .course-row {
+        grid-template-columns: 0.85fr 0.85fr 0.85fr 1.15fr 40px;
+        gap: 4px;
+        padding: 6px;
+      }
+      
+      .course-row select {
+        height: 40px;
+        padding: 6px 3px;
+        font-size: 0.7rem;
+      }
+      
+      .course-row > *:nth-child(5) {
+        height: 40px;
+        font-size: 0.9rem;
+      }
+      
+      /* RTL adjustments for very small screens */
+      [dir="rtl"] .course-header {
+        grid-template-columns: 0.85fr 0.85fr 0.85fr 1.15fr 40px;
+      }
+      
+      [dir="rtl"] .course-row {
+        grid-template-columns: 0.85fr 0.85fr 0.85fr 1.15fr 40px;
+      }
+      
+      .tipbox h3 {
+        font-size: 1.1rem;
+      }
+      
+      .site-footer {
+        font-size: 0.7rem;
+      }
+    }
+    
+    /* Special handling for tablets in portrait (601px - 900px) */
+    @media (min-width: 601px) and (max-width: 900px) {
+      /* Tablet layout with 5 columns - FIXED to show all columns */
+      .course-header {
+        grid-template-columns: 1fr 1fr 1fr 1fr 44px;
+        gap: 8px;
+        text-align: center;
+      }
+      
+      .course-header > div:nth-child(1),
+      .course-header > div:nth-child(2),
+      .course-header > div:nth-child(3),
+      .course-header > div:nth-child(4),
+      .course-header > div:nth-child(5) {
+        display: block;
+      }
+      
+      .course-header > div:nth-child(5) {
+        visibility: hidden;
+      }
+      
+      .course-row {
+        grid-template-columns: 1fr 1fr 1fr 1fr 44px;
+        gap: 8px;
+      }
+      
+      .course-row > *:nth-child(1),
+      .course-row > *:nth-child(2),
+      .course-row > *:nth-child(3),
+      .course-row > *:nth-child(4),
+      .course-row > *:nth-child(5) {
+        display: block;
+      }
+      
+      .course-row select {
+        height: 44px;
+        padding: 8px 6px;
+        font-size: 0.85rem;
+      }
+      
+      .course-row > *:nth-child(5) {
+        grid-column: 5;
+        grid-row: 1;
+        width: 100%;
+        height: 44px;
+      }
+      
+      /* RTL for tablet - FIXED */
+      [dir="rtl"] .course-header {
+        grid-template-columns: 1fr 1fr 1fr 1fr 44px;
+        text-align: center;
+      }
+      
+      [dir="rtl"] .course-row {
+        grid-template-columns: 1fr 1fr 1fr 1fr 44px;
+      }
+      
+      [dir="rtl"] .course-row select {
+        text-align: right;
+        padding: 8px 6px;
+      }
+    }
+    
+    /* Desktop RTL improvements */
+    @media (min-width: 901px) {
+      [dir="rtl"] .course-header {
+        text-align: center;
+      }
+      
+      [dir="rtl"] .course-header > div {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="wrapper">
     <header>
-      <div class="topRow">
-        <div>
-          <h1 id="tTitle">GPA Calculator</h1>
-          <p class="sub" id="tSubtitle">
-            For University of Jordan students — calculates semester GPA and cumulative GPA.
-          </p>
-        </div>
+      <div>
+        <h1 id="tTitle">GPA Calculator</h1>
+        <p class="sub" id="tSubtitle">
+          For University of Jordan students — calculates semester GPA and cumulative GPA.
+        </p>
+      </div>
 
-        <div class="langBox">
-          <label for="lang" id="tLangLabel">Language</label>
-          <select id="lang">
-            <option value="en">English</option>
-            <option value="ar">العربية</option>
-          </select>
-        </div>
+      <div class="langBox">
+        <label for="lang" id="tLangLabel">Language</label>
+        <select id="lang">
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+        </select>
       </div>
     </header>
 
     <div class="grid">
-      <!-- INPUTS -->
+      <!-- INPUT CARD -->
       <section class="card">
         <h2 id="tInputs">Inputs</h2>
 
-        <div class="row two">
-          <div>
+        <div class="row">
+          <div class="field">
             <label for="h0" id="tH0">Total credit hours in your major</label>
             <input id="h0" type="number" min="0" step="1" placeholder="Example: 164">
           </div>
-          <div>
-            <label for="s" id="tS">Current cumulative GPA (0 if none)</label>
-            <input id="s" type="number" min="0" max="4" step="0.01" placeholder="Example: 2.70">
-            <p class="hint" id="tSRange">Allowed range: 0.00 to 4.00</p>
-          </div>
-        </div>
-
-        <div class="row">
-          <div>
+          <div class="field">
             <label for="h" id="tH">Completed hours (excluding this semester)</label>
             <input id="h" type="number" min="0" step="1" placeholder="Example: 90">
-            <p class="hint" id="tHHint">Enter 0 if this is your first semester.</p>
           </div>
         </div>
 
-        <div class="row three">
-          <div>
-            <label for="i" id="tI">This semester: 3-hour courses count</label>
-            <input id="i" type="number" min="0" step="1" placeholder="Example: 5">
-          </div>
-          <div>
-            <label for="k" id="tK">This semester: 2-hour courses count</label>
-            <input id="k" type="number" min="0" step="1" placeholder="Example: 1">
-          </div>
-          <div>
-            <label for="m" id="tM">This semester: 1-hour courses count</label>
-            <input id="m" type="number" min="0" step="1" placeholder="Example: 2">
-          </div>
+        <div class="field">
+          <label for="s" id="tS">Current cumulative GPA (0 if none)</label>
+          <input id="s" type="number" min="0" max="4" step="0.01" placeholder="Example: 2.70">
+          <p class="hint" id="tSRange">Allowed range: 0.00 to 4.00</p>
         </div>
 
-        <div class="row two">
-          <div>
-            <label for="repeated" id="tRepeated">Repeated any courses this semester?</label>
-            <select id="repeated">
-              <option value="" id="tSelect">Select...</option>
-              <option value="Y" id="tYes">Yes</option>
-              <option value="N" id="tNo">No</option>
-            </select>
+        <!-- Course Input Section -->
+        <div class="courses-section">
+          <h3 id="tThisSemesterCourses">This semester courses</h3>
+          
+          <!-- Course Header -->
+          <div class="course-header">
+            <div id="tCreditsHeader">Credits</div>
+            <div id="tGradeHeader">Grade</div>
+            <div id="tRepeatedHeader">Repeated?</div>
+            <div id="tOldGradeHeader">Old Grade</div>
+            <div></div>
           </div>
-
-          <div class="notice" style="margin:0;">
-            <span id="tAcceptedGradesLabel">Accepted grades:</span>
-            <span class="pill">A A- B+ B B- C+ C C- D+ D D- F</span>
+          
+          <!-- Course Rows Container -->
+          <div id="courseList"></div>
+          
+          <!-- Course Actions -->
+          <div class="course-actions">
+            <button class="secondary" onclick="addCourse()" id="tAddCourse">Add course</button>
+            <button class="secondary" onclick="addCourse(3)" id="tAddThree">Add 3 courses</button>
           </div>
-        </div>
-
-        <!-- Repeat counts + OLD grades -->
-        <div id="repeatSection" class="section" style="display:none;">
-          <h2 style="margin-top:0;" id="tRepeatedCourses">Repeated courses</h2>
-
-          <div class="row three">
-            <div>
-              <label for="r1" id="tR1">Repeated 3-hour courses count</label>
-              <input id="r1" type="number" min="0" step="1" value="0">
-            </div>
-            <div>
-              <label for="r2" id="tR2">Repeated 2-hour courses count</label>
-              <input id="r2" type="number" min="0" step="1" value="0">
-            </div>
-            <div>
-              <label for="r3" id="tR3">Repeated 1-hour courses count</label>
-              <input id="r3" type="number" min="0" step="1" value="0">
-            </div>
-          </div>
-
-          <div class="notice">
-            <span id="tOldAccepted">Old grades (repeated courses) accepted:</span>
-            <span class="pill">C+ C C- D+ D D- F</span>
-          </div>
-
-          <div class="section">
-            <h2 style="margin-top:0;" id="tOldGradesTitle">OLD grades (repeated courses)</h2>
-            <p class="hint" style="margin-top:-6px;" id="tOldOrder">
-              Order: 3-hour, then 2-hour, then 1-hour.
-            </p>
-
-            <div id="oldGradesContainer" class="gradesGrid"></div>
-          </div>
-        </div>
-
-        <!-- NEW grades -->
-        <div class="section">
-          <h2 style="margin-top:0;" id="tThisSemesterGrades">This semester grades</h2>
-          <p class="hint" style="margin-top:-6px;" id="tNewOrder">
-            Order: 3-hour, then 2-hour, then 1-hour.
-            Include NEW grades for repeated courses.
+          
+          <p class="hint" id="tCourseHint">
+            Include all courses this semester. For repeated courses, mark as "Yes" and select the old grade.
           </p>
-          <div id="newGradesContainer" class="gradesGrid"></div>
         </div>
 
-        <div class="btnRow">
-          <button class="primary" id="btnCalc" type="button">Calculate</button>
-          <button class="secondary" id="btnReset" type="button">Reset</button>
+        <!-- Main Actions -->
+        <div class="actions">
+          <button class="primary" onclick="calculate()" id="btnCalc">Calculate</button>
+          <button class="secondary" onclick="resetAll()" id="btnReset">Reset</button>
         </div>
 
-        <div id="message" class="notice" style="display:none;"></div>
+        <div class="message-box" id="message"></div>
       </section>
 
-      <!-- OUTPUTS -->
-      <section class="card">
+      <!-- RESULTS CARD -->
+      <section class="card results-card">
         <h2 id="tResults">Results</h2>
 
-        <div id="resultsBox" class="notice" style="display:none;">
-          <div class="resultLine">
+        <div class="result-box" id="resultsBox" style="display:none;">
+          <div class="result-line">
             <span id="tOutGPA0Label">Current semester GPA</span>
-            <strong class="mono" id="outGPA0">0.00</strong>
+            <span class="result-value" id="outGPA0">0.00</span>
           </div>
-          <div class="resultLine">
+          <div class="result-line">
             <span id="tOutGPALabel">Cumulative GPA</span>
-            <strong class="mono" id="outGPA">0.00</strong>
+            <span class="result-value" id="outGPA">0.00</span>
           </div>
-          <div class="resultLine">
+          <div class="result-line">
             <span id="tOutTLabel">Total completed hours</span>
-            <strong class="mono" id="outT">0</strong>
+            <span class="result-value" id="outT">0</span>
           </div>
-          <div class="resultLine">
+          <div class="result-line">
             <span id="tOutRLabel">Remaining hours</span>
-            <strong class="mono" id="outR">0</strong>
+            <span class="result-value" id="outR">0</span>
           </div>
-
-          <!-- NEW: Highest possible cumulative GPA -->
-          <div class="resultLine">
-            <span id="tOutGPAHiLabel">The highest cumulative GPA you can reach</span>
-            <strong class="mono" id="outGPAHi">0.00</strong>
+          <div class="result-line">
+            <span id="tOutGPAHiLabel">Highest possible GPA</span>
+            <span class="result-value" id="outGPAHi">0.00</span>
           </div>
-
-          <div class="resultLine">
+          <div class="result-line">
             <span id="tOutGradeLabel">Grade</span>
-            <strong id="outGrade">—</strong>
+            <span class="grade-badge" id="outGrade">—</span>
           </div>
         </div>
 
-        <div id="aimSection" class="section" style="display:none;">
-          <h2 style="margin-top:0;" id="tTarget">Target</h2>
-          <div class="row">
-            <div>
-              <label for="aimSelect" id="tAimLabel">Choose your target</label>
-              <select id="aimSelect"></select>
-              <p class="hint" id="aimHint"></p>
-            </div>
+        <!-- Target Section -->
+        <div class="target-section" id="aimSection" style="display:none;">
+          <h3 id="tTarget">Target</h3>
+          <div class="field">
+            <label for="aimSelect" id="tAimLabel">Choose your target</label>
+            <select id="aimSelect"></select>
+            <p class="hint" id="aimHint"></p>
           </div>
-
-          <div id="adviceBox" class="notice ok" style="display:none;">
-            <div class="advice" id="adviceText"></div>
+          
+          <div class="advice-box" id="adviceBox">
+            <div id="adviceText"></div>
           </div>
         </div>
 
-        <div class="notice">
-          <strong id="tTipsTitle">Tips</strong>
-          <ul class="tips">
-            <li id="tTip1"></li>
-            <li id="tTip2"></li>
-            <li id="tTip3"></li>
-            <li id="tTip4"></li>
-            <li id="tTip5"></li>
+        <!-- Tips Box -->
+        <div class="tipbox">
+          <h3 id="tTipsTitle">Tips</h3>
+          <ul>
+            <li id="tTip1">Enter your completed hours before this semester. The tool adds this semester hours automatically.</li>
+            <li id="tTip2">If you repeated courses, mark them and select the old grade that will be replaced.</li>
+            <li id="tTip3">Use your official study plan for total credit hours.</li>
+            <li id="tTip4">GPA values are rounded to 2 decimals like university reports.</li>
+            <li id="tTip5">"Highest possible GPA" assumes 4.00 in all remaining hours.</li>
           </ul>
         </div>
       </section>
     </div>
+    
+    <!-- Footer with credit -->
+    <footer class="site-footer">
+      Crafted with precision by Eng. Abdullah Abu Qaoud
+    </footer>
   </div>
 
   <script>
@@ -486,27 +948,14 @@
         sRange: "Allowed range: 0.00 to 4.00",
         h: "Completed hours (excluding this semester)",
         hHint: "Enter 0 if this is your first semester.",
-        i: "This semester: 3-hour courses count",
-        k: "This semester: 2-hour courses count",
-        m: "This semester: 1-hour courses count",
-        repeated: "Repeated any courses this semester?",
-        select: "Select...",
-        yes: "Yes",
-        no: "No",
-        acceptedGradesLabel: "Accepted grades:",
-
-        repeatedCourses: "Repeated courses",
-        r1: "Repeated 3-hour courses count",
-        r2: "Repeated 2-hour courses count",
-        r3: "Repeated 1-hour courses count",
-        oldAccepted: "Old grades (repeated courses) accepted:",
-        oldGradesTitle: "OLD grades (repeated courses)",
-        oldOrder: "Order: 3-hour, then 2-hour, then 1-hour.",
-
-        thisSemesterGrades: "This semester grades",
-        newOrder:
-          "Order: 3-hour, then 2-hour, then 1-hour.\n" +
-          "Include NEW grades for repeated courses.",
+        thisSemesterCourses: "This semester courses",
+        creditsHeader: "Credits",
+        gradeHeader: "Grade",
+        repeatedHeader: "Repeated?",
+        oldGradeHeader: "Old Grade",
+        addCourse: "Add course",
+        addThree: "Add 3 courses",
+        courseHint: "Include all courses this semester. For repeated courses, mark as 'Yes' and select the old grade.",
 
         calculate: "Calculate",
         reset: "Reset",
@@ -515,7 +964,7 @@
         outGPALabel: "Cumulative GPA",
         outTLabel: "Total completed hours",
         outRLabel: "Remaining hours",
-        outGPAHiLabel: "The highest cumulative GPA you can reach",
+        outGPAHiLabel: "Highest possible GPA",
         outGradeLabel: "Grade",
 
         aimLabel: "Choose your target",
@@ -524,14 +973,13 @@
 
         tipsTitle: "Tips",
         tip1: "Enter your completed hours before this semester. The tool adds this semester hours automatically.",
-        tip2: "If you repeated courses, enter their old grades first, then include their new grades with the semester grades.",
-        tip3: "Do not leave any box empty.",
-        tip4: "GPA values are displayed rounded to 2 decimals, like most university reports.",
-        tip5: "The “highest cumulative GPA” assumes you get 4.00 in all remaining hours.",
+        tip2: "If you repeated courses, mark them and select the old grade that will be replaced.",
+        tip3: "Use your official study plan for total credit hours.",
+        tip4: "GPA values are rounded to 2 decimals like university reports.",
+        tip5: "'Highest possible GPA' assumes 4.00 in all remaining hours.",
 
-        msgInvalid: "Invalid Entry.\nRe-run the program and try again.",
-        msgHoursTooHigh_1: "The number of completed hours is becoming more than ",
-        msgHoursTooHigh_2: ".\nRe-Run the program and try again.",
+        msgInvalid: "Invalid entry. Please check all fields.",
+        msgHoursTooHigh: "Total hours exceed major requirement. Please check inputs.",
         msgSuccess: "Calculated successfully.",
         msgNeedRepeat: "You likely need to repeat courses.",
         msgRaiseTo: "Raise cumulative GPA at least to: ",
@@ -554,7 +1002,10 @@
           excellent: "Excellent",
           good: "Good",
           acceptable: "Acceptable"
-        }
+        },
+        
+        yes: "Yes",
+        no: "No"
       },
 
       ar: {
@@ -572,27 +1023,14 @@
         sRange: "النطاق المسموح: 0.00 إلى 4.00",
         h: "الساعات المنجزة (بدون هذا الفصل)",
         hHint: "أدخل 0 إذا كان هذا أول فصل لك.",
-        i: "هذا الفصل: عدد مواد 3 ساعات",
-        k: "هذا الفصل: عدد مواد ساعتين",
-        m: "هذا الفصل: عدد مواد ساعة واحدة",
-        repeated: "هل لديك مواد مُعادة هذا الفصل؟",
-        select: "اختر...",
-        yes: "نعم",
-        no: "لا",
-        acceptedGradesLabel: "العلامات المقبولة:",
-
-        repeatedCourses: "المواد المُعادة",
-        r1: "عدد مواد 3 ساعات المُعادة",
-        r2: "عدد مواد ساعتين المُعادة",
-        r3: "عدد مواد ساعة واحدة المُعادة",
-        oldAccepted: "العلامات القديمة (للمواد المُعادة) المقبولة:",
-        oldGradesTitle: "العلامات القديمة (للمواد المُعادة)",
-        oldOrder: "الترتيب: 3 ساعات، ثم ساعتين، ثم ساعة.",
-
-        thisSemesterGrades: "علامات هذا الفصل",
-        newOrder:
-          "الترتيب: 3 ساعات، ثم ساعتين، ثم ساعة.\n" +
-          "ضمّن العلامات الجديدة للمواد المُعادة.",
+        thisSemesterCourses: "مواد هذا الفصل",
+        creditsHeader: "الساعات",
+        gradeHeader: "العلامة",
+        repeatedHeader: "مُعادة؟",
+        oldGradeHeader: "العلامة القديمة",
+        addCourse: "إضافة مادة",
+        addThree: "إضافة 3 مواد",
+        courseHint: "أدخل جميع مواد هذا الفصل. للمواد المُعادة، اختر 'نعم' واختر العلامة القديمة.",
 
         calculate: "احسب",
         reset: "إعادة ضبط",
@@ -601,7 +1039,7 @@
         outGPALabel: "المعدل التراكمي",
         outTLabel: "إجمالي الساعات المنجزة",
         outRLabel: "الساعات المتبقية",
-        outGPAHiLabel: "أعلى معدل تراكمي يمكنك الوصول إليه",
+        outGPAHiLabel: "أعلى معدل ممكن",
         outGradeLabel: "التقدير",
 
         aimLabel: "اختر هدفك",
@@ -610,14 +1048,13 @@
 
         tipsTitle: "نصائح",
         tip1: "أدخل الساعات المنجزة قبل هذا الفصل. الأداة تضيف ساعات هذا الفصل تلقائياً.",
-        tip2: "إذا لديك مواد مُعادة: أدخل العلامات القديمة أولاً، ثم أدخل العلامات الجديدة ضمن علامات هذا الفصل.",
-        tip3: "لا تترك أي خانة فارغة.",
+        tip2: "إذا لديك مواد مُعادة: حددها واختر العلامة القديمة التي سيتم استبدالها.",
+        tip3: "استخدم خطتك الدراسية الرسمية لإجمالي الساعات.",
         tip4: "يتم عرض المعدل مقرباً إلى منزلتين عشريتين مثل أغلب التقارير.",
-        tip5: "“أعلى معدل تراكمي” يفترض أنك ستحصل على 4.00 في كل الساعات المتبقية.",
+        tip5: "'أعلى معدل ممكن' يفترض 4.00 في كل الساعات المتبقية.",
 
-        msgInvalid: "إدخال غير صالح.\nأعد تشغيل البرنامج وحاول مرة أخرى.",
-        msgHoursTooHigh_1: "عدد الساعات المنجزة أصبح أكثر من ",
-        msgHoursTooHigh_2: ".\nأعد التشغيل وحاول مرة أخرى.",
+        msgInvalid: "إدخال غير صالح. يرجى مراجعة جميع الحقول.",
+        msgHoursTooHigh: "إجمالي الساعات يتجاوز متطلبات التخصص. يرجى مراجعة المدخلات.",
         msgSuccess: "تم الحساب بنجاح.",
         msgNeedRepeat: "قد تحتاج لإعادة بعض المواد.",
         msgRaiseTo: "ارفع المعدل التراكمي على الأقل إلى: ",
@@ -640,100 +1077,14 @@
           excellent: "ممتاز",
           good: "جيد",
           acceptable: "مقبول"
-        }
+        },
+        
+        yes: "نعم",
+        no: "لا"
       }
     };
 
     let currentLang = "en";
-
-    const el = (id) => document.getElementById(id);
-
-    function setLang(lang) {
-      currentLang = I18N[lang] ? lang : "en";
-      const t = I18N[currentLang];
-
-      document.documentElement.lang = currentLang;
-      document.body.dir = (currentLang === "ar") ? "rtl" : "ltr";
-
-      el("tTitle").textContent = t.title;
-      el("tSubtitle").textContent = t.subtitle;
-      el("tLangLabel").textContent = t.langLabel;
-
-      el("tInputs").textContent = t.inputs;
-      el("tResults").textContent = t.results;
-      el("tTarget").textContent = t.target;
-
-      el("tH0").textContent = t.h0;
-      el("tS").textContent = t.s;
-      el("tSRange").textContent = t.sRange;
-      el("tH").textContent = t.h;
-      el("tHHint").textContent = t.hHint;
-      el("tI").textContent = t.i;
-      el("tK").textContent = t.k;
-      el("tM").textContent = t.m;
-      el("tRepeated").textContent = t.repeated;
-
-      el("tSelect").textContent = t.select;
-      el("tYes").textContent = t.yes;
-      el("tNo").textContent = t.no;
-
-      el("tAcceptedGradesLabel").textContent = t.acceptedGradesLabel;
-
-      el("tRepeatedCourses").textContent = t.repeatedCourses;
-      el("tR1").textContent = t.r1;
-      el("tR2").textContent = t.r2;
-      el("tR3").textContent = t.r3;
-      el("tOldAccepted").textContent = t.oldAccepted;
-      el("tOldGradesTitle").textContent = t.oldGradesTitle;
-      el("tOldOrder").textContent = t.oldOrder;
-
-      el("tThisSemesterGrades").textContent = t.thisSemesterGrades;
-      el("tNewOrder").textContent = t.newOrder;
-
-      el("btnCalc").textContent = t.calculate;
-      el("btnReset").textContent = t.reset;
-
-      el("tOutGPA0Label").textContent = t.outGPA0Label;
-      el("tOutGPALabel").textContent = t.outGPALabel;
-      el("tOutTLabel").textContent = t.outTLabel;
-      el("tOutRLabel").textContent = t.outRLabel;
-      el("tOutGPAHiLabel").textContent = t.outGPAHiLabel;
-      el("tOutGradeLabel").textContent = t.outGradeLabel;
-
-      el("tAimLabel").textContent = t.aimLabel;
-
-      el("tTipsTitle").textContent = t.tipsTitle;
-      el("tTip1").innerHTML = t.tip1;
-      el("tTip2").innerHTML = t.tip2;
-      el("tTip3").innerHTML = t.tip3;
-      el("tTip4").innerHTML = t.tip4;
-      el("tTip5").innerHTML = t.tip5;
-
-      const resultsVisible = el("resultsBox").style.display !== "none";
-      if (resultsVisible && window.__lastState) setupAimUI(window.__lastState);
-
-      localStorage.setItem("lang", currentLang);
-    }
-
-    function showMessage(text, isError) {
-      const box = el("message");
-      box.style.display = "block";
-      box.textContent = text;
-      box.classList.toggle("error", !!isError);
-      box.classList.toggle("ok", !isError);
-    }
-
-    function clearMessage() {
-      const box = el("message");
-      box.style.display = "none";
-      box.textContent = "";
-      box.classList.remove("error", "ok");
-    }
-
-    function invalidEntry() {
-      const t = I18N[currentLang] || I18N.en;
-      showMessage(t.msgInvalid, true);
-    }
 
     // ====== GRADE TABLE ======
     const gradePoints = new Map([
@@ -751,122 +1102,254 @@
       ["F", 0.50]
     ]);
 
-    function normalizeGrade(s) {
-      return String(s || "").trim().toUpperCase();
-    }
+    const gradeOptions = Array.from(gradePoints.keys());
 
-    function score(g) {
-      const key = normalizeGrade(g);
-      return gradePoints.has(key) ? gradePoints.get(key) : 0.00;
-    }
+    // ====== UTILITY FUNCTIONS ======
+    const el = (id) => document.getElementById(id);
 
-    function isValidOldRepeatedGrade(g) {
-      const x = normalizeGrade(g);
-      return (
-        x === "C+" || x === "C" || x === "C-" ||
-        x === "D+" || x === "D" || x === "D-" ||
-        x === "F"
-      );
-    }
+    function setLang(lang) {
+      currentLang = I18N[lang] ? lang : "en";
+      const t = I18N[currentLang];
 
-    function isValidAnyGrade(g) {
-      return gradePoints.has(normalizeGrade(g));
-    }
+      document.documentElement.lang = currentLang;
+      document.body.dir = (currentLang === "ar") ? "rtl" : "ltr";
 
-    // ====== MATH HELPERS ======
-    function round2(x) { return Math.round(x * 100.0) / 100.0; }
-    function fmt2(x) { return Number(x).toFixed(2); }
+      // Update all text elements
+      el("tTitle").textContent = t.title;
+      el("tSubtitle").textContent = t.subtitle;
+      el("tLangLabel").textContent = t.langLabel;
+      el("tInputs").textContent = t.inputs;
+      el("tResults").textContent = t.results;
+      el("tTarget").textContent = t.target;
+      el("tH0").textContent = t.h0;
+      el("tS").textContent = t.s;
+      el("tSRange").textContent = t.sRange;
+      el("tH").textContent = t.h;
+      el("tThisSemesterCourses").textContent = t.thisSemesterCourses;
+      el("tCreditsHeader").textContent = t.creditsHeader;
+      el("tGradeHeader").textContent = t.gradeHeader;
+      el("tRepeatedHeader").textContent = t.repeatedHeader;
+      el("tOldGradeHeader").textContent = t.oldGradeHeader;
+      el("tAddCourse").textContent = t.addCourse;
+      el("tAddThree").textContent = t.addThree;
+      el("tCourseHint").textContent = t.courseHint;
+      el("btnCalc").textContent = t.calculate;
+      el("btnReset").textContent = t.reset;
+      el("tOutGPA0Label").textContent = t.outGPA0Label;
+      el("tOutGPALabel").textContent = t.outGPALabel;
+      el("tOutTLabel").textContent = t.outTLabel;
+      el("tOutRLabel").textContent = t.outRLabel;
+      el("tOutGPAHiLabel").textContent = t.outGPAHiLabel;
+      el("tOutGradeLabel").textContent = t.outGradeLabel;
+      el("tAimLabel").textContent = t.aimLabel;
+      el("tTipsTitle").textContent = t.tipsTitle;
+      el("tTip1").textContent = t.tip1;
+      el("tTip2").textContent = t.tip2;
+      el("tTip3").textContent = t.tip3;
+      el("tTip4").textContent = t.tip4;
+      el("tTip5").textContent = t.tip5;
 
-    // NEW: Highest possible cumulative GPA (assumes 4.00 in remaining hours)
-    function highestPossibleCumulativeGPA(N, R, h0) {
-      let GPAHi = (N + 4.00 * R) / h0;
-      GPAHi = round2(GPAHi);
-      return GPAHi;
-    }
-
-    // ====== UI HELPERS ======
-    function createGradeInput(labelText, placeholder) {
-      const wrap = document.createElement("div");
-      wrap.className = "gradeBox";
-
-      const small = document.createElement("div");
-      small.className = "small";
-      small.textContent = labelText;
-
-      const input = document.createElement("input");
-      input.type = "text";
-      input.placeholder = placeholder || "e.g. A-";
-      input.autocomplete = "off";
-      input.spellcheck = false;
-
-      wrap.appendChild(small);
-      wrap.appendChild(input);
-      return { wrap, input };
-    }
-
-    function toInt(v) {
-      if (v === "" || v === null || v === undefined) return null;
-      const n = Number(v);
-      if (!Number.isFinite(n)) return null;
-      if (!Number.isInteger(n)) return null;
-      if (n < 0) return null;
-      return n;
-    }
-
-    function toNumber(v) {
-      if (v === "" || v === null || v === undefined) return null;
-      const n = Number(v);
-      if (!Number.isFinite(n)) return null;
-      return n;
-    }
-
-    function readGradeInputs(kind) {
-      const cont = (kind === "old") ? el("oldGradesContainer") : el("newGradesContainer");
-      return Array.from(cont.querySelectorAll("input")).map(x => x.value);
-    }
-
-    function rebuildGradeInputs() {
-      const i = toInt(el("i").value);
-      const k = toInt(el("k").value);
-      const m = toInt(el("m").value);
-      if (i === null || k === null || m === null) return;
-
-      const newCont = el("newGradesContainer");
-      newCont.innerHTML = "";
-
-      for (let idx = 1; idx <= (i + k + m); idx++) {
-        const label = (currentLang === "ar") ? `العلامة ${idx}` : `Grade ${idx}`;
-        const placeholder = "A / B+ / C- ...";
-        const { wrap, input } = createGradeInput(label, placeholder);
-        input.dataset.kind = "new";
-        newCont.appendChild(wrap);
+      // Update footer text based on language
+      const footer = document.querySelector('.site-footer');
+      if (footer) {
+        footer.textContent = currentLang === "ar" 
+          ? "مطور بدقة بواسطة م. عبد الله أبو قاعود" 
+          : "Crafted with precision by Eng. Abdullah Abu Qaoud";
       }
 
-      const repeated = el("repeated").value;
-      if (repeated === "Y") {
-        const r1 = toInt(el("r1").value);
-        const r2 = toInt(el("r2").value);
-        const r3 = toInt(el("r3").value);
-        if (r1 === null || r2 === null || r3 === null) return;
+      // Update course rows if they exist
+      updateCourseRowTexts();
 
-        const oldCont = el("oldGradesContainer");
-        oldCont.innerHTML = "";
+      // Update aim UI if results are visible
+      if (el("resultsBox").style.display !== "none" && window.__lastState) {
+        setupAimUI(window.__lastState);
+      }
 
-        for (let idx = 1; idx <= (r1 + r2 + r3); idx++) {
-          const label = (currentLang === "ar") ? `العلامة القديمة ${idx}` : `Old Grade ${idx}`;
-          const placeholder = "C / D+ / F";
-          const { wrap, input } = createGradeInput(label, placeholder);
-          input.dataset.kind = "old";
-          oldCont.appendChild(wrap);
+      localStorage.setItem("lang", currentLang);
+    }
+
+    function updateCourseRowTexts() {
+      const t = I18N[currentLang];
+      const selects = document.querySelectorAll('.course-row select');
+      
+      // Update "Repeated?" select options
+      selects.forEach((select, index) => {
+        if (select.classList.contains('repeated-select')) {
+          select.innerHTML = `
+            <option value="No">${t.no}</option>
+            <option value="Yes">${t.yes}</option>
+          `;
         }
-      } else {
-        el("oldGradesContainer").innerHTML = "";
+      });
+    }
+
+    function showMessage(text, isError) {
+      const box = el("message");
+      box.style.display = "block";
+      box.textContent = text;
+      box.className = "message-box " + (isError ? "error" : "success");
+    }
+
+    function clearMessage() {
+      el("message").style.display = "none";
+    }
+
+    // ====== COURSE MANAGEMENT ======
+    function addCourse(num = 1) {
+      const container = el("courseList");
+      const t = I18N[currentLang];
+      
+      for (let i = 0; i < num; i++) {
+        const row = document.createElement("div");
+        row.className = "course-row";
+        row.innerHTML = `
+          <select class="credits-select">
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+          <select class="grade-select">
+            ${gradeOptions.map(g => `<option value="${g}">${g}</option>`).join('')}
+          </select>
+          <select class="repeated-select">
+            <option value="No">${t.no}</option>
+            <option value="Yes">${t.yes}</option>
+          </select>
+          <select class="old-grade-select" style="opacity: 0.6">
+            ${gradeOptions.map(g => `<option value="${g}">${g}</option>`).join('')}
+          </select>
+          <button class="danger" onclick="this.parentElement.remove()">×</button>
+        `;
+        
+        // Add event listener for repeated toggle
+        const repeatedSelect = row.querySelector('.repeated-select');
+        const oldGradeSelect = row.querySelector('.old-grade-select');
+        
+        repeatedSelect.addEventListener('change', function() {
+          oldGradeSelect.style.opacity = this.value === 'Yes' ? '1' : '0.6';
+          oldGradeSelect.disabled = this.value !== 'Yes';
+        });
+        
+        // Initialize old grade as disabled
+        oldGradeSelect.disabled = true;
+        
+        container.appendChild(row);
       }
     }
 
-    function setupAimUI(state) {
-      const t = I18N[currentLang] || I18N.en;
+    // ====== CALCULATION FUNCTIONS ======
+    function score(grade) {
+      return gradePoints.get(grade) || 0.00;
+    }
 
+    function round2(x) {
+      return Math.round(x * 100.0) / 100.0;
+    }
+
+    function fmt2(x) {
+      return Number(x).toFixed(2);
+    }
+
+    function calculate() {
+      clearMessage();
+      const t = I18N[currentLang];
+
+      // Get basic inputs
+      const h0 = parseInt(el("h0").value);
+      const h = parseInt(el("h").value);
+      const s = parseFloat(el("s").value);
+
+      // Validate basic inputs
+      if (!h0 || h0 < 0 || !h || h < 0 || s < 0 || s > 4 || isNaN(s)) {
+        showMessage(t.msgInvalid, true);
+        return;
+      }
+
+      // Get all courses
+      const courseRows = document.querySelectorAll('.course-row');
+      if (courseRows.length === 0) {
+        showMessage(t.msgInvalid, true);
+        return;
+      }
+
+      let totalSemesterHours = 0;
+      let totalSemesterPoints = 0;
+      let totalOldPoints = 0;
+      let totalOldHours = 0;
+
+      // Process each course
+      courseRows.forEach(row => {
+        const credits = parseInt(row.querySelector('.credits-select').value);
+        const grade = row.querySelector('.grade-select').value;
+        const isRepeated = row.querySelector('.repeated-select').value === 'Yes';
+        const oldGrade = row.querySelector('.old-grade-select').value;
+
+        // Add semester hours and points
+        totalSemesterHours += credits;
+        totalSemesterPoints += credits * score(grade);
+
+        // If repeated, subtract old grade points
+        if (isRepeated) {
+          totalOldPoints += credits * score(oldGrade);
+          totalOldHours += credits;
+        }
+      });
+
+      // Calculate total completed hours (old hours are subtracted because they're replaced)
+      const T = h + totalSemesterHours - totalOldHours;
+      
+      if (T <= 0) {
+        showMessage(t.msgInvalid, true);
+        return;
+      }
+
+      // Calculate cumulative points
+      const N = h * s + totalSemesterPoints - totalOldPoints;
+
+      // Calculate GPAs
+      const GPA = round2(N / T);
+      const GPA0 = round2(totalSemesterPoints / totalSemesterHours);
+      const R = h0 - T;
+
+      // Calculate highest possible GPA (assuming 4.00 in remaining hours)
+      const GPAHi = round2((N + 4.00 * R) / h0);
+
+      // Check if hours exceed major requirement
+      if (T > h0) {
+        showMessage(t.msgHoursTooHigh, true);
+        return;
+      }
+
+      // Display results
+      el("resultsBox").style.display = "block";
+      el("outGPA0").textContent = fmt2(GPA0);
+      el("outGPA").textContent = fmt2(GPA);
+      el("outT").textContent = T;
+      el("outR").textContent = R;
+      el("outGPAHi").textContent = fmt2(GPAHi);
+
+      // Determine grade
+      let gradeKey = "WEAK";
+      if (GPA >= 3.65) gradeKey = "EXCELLENT";
+      else if (GPA >= 3.00) gradeKey = "VERY_GOOD";
+      else if (GPA >= 2.50) gradeKey = "GOOD";
+      else if (GPA >= 2.00) gradeKey = "ACCEPTABLE";
+      
+      el("outGrade").textContent = t.grade[gradeKey];
+
+      // Store state for aim UI
+      const state = { GPA, N, T, R, h0 };
+      window.__lastState = state;
+      
+      // Setup aim UI
+      setupAimUI(state);
+      
+      showMessage(t.msgSuccess, false);
+    }
+
+    // ====== AIM/TARGET UI ======
+    function setupAimUI(state) {
+      const t = I18N[currentLang];
       const aimSection = el("aimSection");
       const aimSelect = el("aimSelect");
       const aimHint = el("aimHint");
@@ -875,12 +1358,12 @@
 
       aimSelect.innerHTML = "";
       adviceBox.style.display = "none";
-      adviceText.textContent = "";
       aimHint.textContent = "";
 
       const GPA = state.GPA;
 
-      if (GPA >= 3.65 && GPA <= 4.00) {
+      // Hide aim section for excellent students
+      if (GPA >= 3.65) {
         aimSection.style.display = "none";
         return;
       }
@@ -930,16 +1413,14 @@
 
       aimSelect.onchange = () => {
         adviceBox.style.display = "none";
-        adviceText.textContent = "";
 
         const choice = aimSelect.value;
         if (!choice) return;
 
         if (!(state.R > 0)) {
           adviceText.textContent = t.msgRemainMust;
+          adviceBox.className = "advice-box error";
           adviceBox.style.display = "block";
-          adviceBox.classList.add("error");
-          adviceBox.classList.remove("ok");
           return;
         }
 
@@ -953,14 +1434,11 @@
         let target = null;
 
         if (choice === "EXCELLENT_Y") target = targets.EXCELLENT;
-
         if (choice === "GOOD_A") target = targets.VERY_GOOD;
         if (choice === "GOOD_B") target = targets.EXCELLENT;
-
         if (choice === "ACC_A") target = targets.GOOD;
         if (choice === "ACC_B") target = targets.VERY_GOOD;
         if (choice === "ACC_C") target = targets.EXCELLENT;
-
         if (choice === "WEAK_A") target = targets.ACCEPTABLE;
         if (choice === "WEAK_B") target = targets.GOOD;
         if (choice === "WEAK_C") target = targets.VERY_GOOD;
@@ -971,228 +1449,65 @@
         const R = state.R;
         const h0 = state.h0;
 
-        let x = (target * h0 - N) / R;
+        let requiredGPA = (target * h0 - N) / R;
 
-        if (x > 4.00) {
-          const e = (x - 4.00) * R;
-          N += e;
+        if (requiredGPA > 4.00) {
+          // Need to repeat courses to raise GPA first
+          const extraPoints = (requiredGPA - 4.00) * R;
+          N += extraPoints;
           const newGPA = N / T;
-
-          const x2 = (target * h0 - N) / R;
-
+          
+          const newRequiredGPA = (target * h0 - N) / R;
+          
           adviceText.textContent =
             t.msgNeedRepeat + "\n" +
             t.msgRaiseTo + fmt2(newGPA) + "\n" +
-            t.msgThenKeep + fmt2(x2);
+            t.msgThenKeep + fmt2(newRequiredGPA);
         } else {
-          adviceText.textContent = t.msgKeep + fmt2(x);
+          adviceText.textContent = t.msgKeep + fmt2(requiredGPA);
         }
 
+        adviceBox.className = "advice-box";
         adviceBox.style.display = "block";
-        adviceBox.classList.remove("error");
-        adviceBox.classList.add("ok");
       };
     }
 
-    function calc() {
-      clearMessage();
-      const t = I18N[currentLang] || I18N.en;
-
-      const h0 = toInt(el("h0").value);
-      const s  = toNumber(el("s").value);
-      const h  = toInt(el("h").value);
-      const i  = toInt(el("i").value);
-      const k  = toInt(el("k").value);
-      const m  = toInt(el("m").value);
-      const repeated = el("repeated").value;
-
-      if (h0 === null || s === null || h === null || i === null || k === null || m === null) {
-        invalidEntry();
-        return;
-      }
-
-      if (s > 4.00 || s < 0.00) {
-        invalidEntry();
-        return;
-      }
-
-      if (repeated !== "Y" && repeated !== "N") {
-        invalidEntry();
-        return;
-      }
-
-      let r0 = 0.00;
-      let p0 = 0;
-      let r1 = 0, r2 = 0, r3 = 0;
-
-      if (repeated === "Y") {
-        r1 = toInt(el("r1").value);
-        r2 = toInt(el("r2").value);
-        r3 = toInt(el("r3").value);
-
-        if (r1 === null || r2 === null || r3 === null) {
-          invalidEntry();
-          return;
-        }
-
-        const oldGrades = readGradeInputs("old");
-        if (oldGrades.length !== (r1 + r2 + r3)) {
-          invalidEntry();
-          return;
-        }
-
-        for (let idx = 0; idx < r1; idx++) {
-          const g = oldGrades[idx];
-          if (!isValidOldRepeatedGrade(g)) { invalidEntry(); return; }
-          r0 += 3.0 * score(g);
-        }
-
-        for (let idx = r1; idx < r1 + r2; idx++) {
-          const g = oldGrades[idx];
-          if (!isValidOldRepeatedGrade(g)) { invalidEntry(); return; }
-          r0 += 2.0 * score(g);
-        }
-
-        for (let idx = r1 + r2; idx < r1 + r2 + r3; idx++) {
-          const g = oldGrades[idx];
-          if (!isValidOldRepeatedGrade(g)) { invalidEntry(); return; }
-          r0 += score(g);
-        }
-
-        p0 = 3 * r1 + 2 * r2 + r3;
-      }
-
-      const newGrades = readGradeInputs("new");
-      if (newGrades.length !== (i + k + m)) {
-        invalidEntry();
-        return;
-      }
-
-      let r = 0.00;
-
-      for (let idx = 0; idx < i; idx++) {
-        const g = newGrades[idx];
-        if (!isValidAnyGrade(g)) { invalidEntry(); return; }
-        r += 3.0 * score(g);
-      }
-
-      for (let idx = i; idx < i + k; idx++) {
-        const g = newGrades[idx];
-        if (!isValidAnyGrade(g)) { invalidEntry(); return; }
-        r += 2.0 * score(g);
-      }
-
-      for (let idx = i + k; idx < i + k + m; idx++) {
-        const g = newGrades[idx];
-        if (!isValidAnyGrade(g)) { invalidEntry(); return; }
-        r += score(g);
-      }
-
-      const N = h * s + r - r0;
-      const T = h + 3 * i + 2 * k + m - p0;
-
-      const denomSemester = (T - h + p0);
-      if (!(denomSemester > 0)) {
-        invalidEntry();
-        return;
-      }
-
-      let GPA0 = (r) / denomSemester;
-      GPA0 = round2(GPA0);
-
-      if (T > h0) {
-        showMessage(t.msgHoursTooHigh_1 + h0 + t.msgHoursTooHigh_2, true);
-        return;
-      }
-
-      const R = h0 - T;
-
-      let GPA = N / T;
-      GPA = round2(GPA);
-
-      // NEW: GPAHi
-      const GPAHi = highestPossibleCumulativeGPA(N, R, h0);
-
-      el("resultsBox").style.display = "block";
-      el("outGPA0").textContent = fmt2(GPA0);
-      el("outGPA").textContent = fmt2(GPA);
-      el("outT").textContent = String(T);
-      el("outR").textContent = String(R);
-      el("outGPAHi").textContent = fmt2(GPAHi);
-
-      let gradeKey = "WEAK";
-      if (GPA >= 3.65 && GPA <= 4.00) gradeKey = "EXCELLENT";
-      else if (GPA >= 3.00 && GPA <= 3.64) gradeKey = "VERY_GOOD";
-      else if (GPA >= 2.50 && GPA <= 2.99) gradeKey = "GOOD";
-      else if (GPA >= 2.00 && GPA <= 2.49) gradeKey = "ACCEPTABLE";
-      else gradeKey = "WEAK";
-
-      el("outGrade").textContent = t.grade[gradeKey];
-
-      const state = { GPA, N, T, R, h0 };
-      window.__lastState = state;
-      setupAimUI(state);
-
-      showMessage(t.msgSuccess, false);
-    }
-
+    // ====== RESET FUNCTION ======
     function resetAll() {
       clearMessage();
-
-      ["h0","s","h","i","k","m","r1","r2","r3"].forEach(id => {
-        const node = el(id);
-        if (!node) return;
-        if (id === "r1" || id === "r2" || id === "r3") node.value = "0";
-        else node.value = "";
-      });
-
-      el("repeated").value = "";
-
-      el("repeatSection").style.display = "none";
-      el("oldGradesContainer").innerHTML = "";
-      el("newGradesContainer").innerHTML = "";
-
+      
+      // Reset inputs
+      ["h0", "h", "s"].forEach(id => el(id).value = "");
+      
+      // Clear course list
+      el("courseList").innerHTML = "";
+      
+      // Hide results
       el("resultsBox").style.display = "none";
       el("aimSection").style.display = "none";
       el("adviceBox").style.display = "none";
-      el("adviceText").textContent = "";
-
-      window.__lastState = null;
-      rebuildGradeInputs();
+      
+      // Add default courses
+      addCourse(3);
     }
 
-    function handleRepeatedChange() {
-      const rep = el("repeated").value;
-      el("repeatSection").style.display = (rep === "Y") ? "block" : "none";
-      rebuildGradeInputs();
+    // ====== INITIALIZATION ======
+    function init() {
+      // Initialize language
+      const savedLang = localStorage.getItem("lang") || 
+                       (navigator.language.toLowerCase().startsWith("ar") ? "ar" : "en");
+      el("lang").value = savedLang;
+      setLang(savedLang);
+      
+      // Add initial courses
+      addCourse(3);
+      
+      // Add event listeners
+      el("lang").addEventListener("change", (e) => setLang(e.target.value));
     }
 
-    ["i","k","m","r1","r2","r3"].forEach(id => {
-      const node = el(id);
-      if (node) node.addEventListener("input", rebuildGradeInputs);
-    });
-
-    el("repeated").addEventListener("change", handleRepeatedChange);
-    el("btnCalc").addEventListener("click", calc);
-    el("btnReset").addEventListener("click", resetAll);
-
-    el("lang").addEventListener("change", (e) => {
-      setLang(e.target.value);
-      rebuildGradeInputs();
-    });
-
-    (function initLang() {
-      const saved = localStorage.getItem("lang");
-      const nav = (navigator.language || "").toLowerCase();
-
-      let initial = "en";
-      if (saved && I18N[saved]) initial = saved;
-      else if (nav.startsWith("ar")) initial = "ar";
-
-      el("lang").value = initial;
-      setLang(initial);
-      rebuildGradeInputs();
-    })();
+    // Initialize when page loads
+    window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
