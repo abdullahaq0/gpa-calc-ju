@@ -253,15 +253,47 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* Grade Badge with Color Coding */
     .grade-badge {
       display: inline-block;
       padding: 4px 12px;
       border-radius: 20px;
-      background: rgba(104, 240, 165, 0.15);
-      border: 1px solid rgba(104, 240, 165, 0.3);
-      color: #a8ffd1;
       font-size: 0.9rem;
       font-weight: 600;
+      /* Default style */
+      background: rgba(156, 163, 175, 0.15);
+      border: 1px solid rgba(156, 163, 175, 0.3);
+      color: #d1d5db;
+    }
+
+    .grade-badge.excellent {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #a7f3d0;
+    }
+
+    .grade-badge.verygood {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #bbf7d0;
+    }
+
+    .grade-badge.good {
+      background: rgba(250, 204, 21, 0.15);
+      border: 1px solid rgba(250, 204, 21, 0.3);
+      color: #fef3c7;
+    }
+
+    .grade-badge.acceptable {
+      background: rgba(249, 115, 22, 0.15);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      color: #fed7aa;
+    }
+
+    .grade-badge.weak {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fecaca;
     }
 
     /* Target Section */
@@ -611,6 +643,12 @@
       
       .result-value {
         font-size: 1.2rem;
+      }
+      
+      /* Mobile adjustments for grade badge */
+      .grade-badge {
+        font-size: 0.85rem;
+        padding: 3px 10px;
       }
       
       .tipbox {
@@ -1329,12 +1367,30 @@
 
       // Determine grade
       let gradeKey = "WEAK";
-      if (GPA >= 3.65) gradeKey = "EXCELLENT";
-      else if (GPA >= 3.00) gradeKey = "VERY_GOOD";
-      else if (GPA >= 2.50) gradeKey = "GOOD";
-      else if (GPA >= 2.00) gradeKey = "ACCEPTABLE";
+      let gradeClass = "weak";
       
-      el("outGrade").textContent = t.grade[gradeKey];
+      if (GPA >= 3.65) {
+        gradeKey = "EXCELLENT";
+        gradeClass = "excellent";
+      } else if (GPA >= 3.00) {
+        gradeKey = "VERY_GOOD";
+        gradeClass = "verygood";
+      } else if (GPA >= 2.50) {
+        gradeKey = "GOOD";
+        gradeClass = "good";
+      } else if (GPA >= 2.00) {
+        gradeKey = "ACCEPTABLE";
+        gradeClass = "acceptable";
+      }
+      
+      const gradeElement = el("outGrade");
+      gradeElement.textContent = t.grade[gradeKey];
+      
+      // Remove all grade classes first
+      gradeElement.classList.remove("excellent", "verygood", "good", "acceptable", "weak");
+      
+      // Add the appropriate grade class
+      gradeElement.classList.add(gradeClass);
 
       // Store state for aim UI
       const state = { GPA, N, T, R, h0 };
@@ -1485,6 +1541,11 @@
       el("resultsBox").style.display = "none";
       el("aimSection").style.display = "none";
       el("adviceBox").style.display = "none";
+      
+      // Reset grade badge to default
+      const gradeElement = el("outGrade");
+      gradeElement.classList.remove("excellent", "verygood", "good", "acceptable", "weak");
+      gradeElement.textContent = "—";
       
       // Add default courses
       addCourse(3);
