@@ -260,7 +260,6 @@
       border-radius: 20px;
       font-size: 0.9rem;
       font-weight: 600;
-      /* Default style */
       background: rgba(156, 163, 175, 0.15);
       border: 1px solid rgba(156, 163, 175, 0.3);
       color: #d1d5db;
@@ -464,7 +463,6 @@
       /* MOBILE COURSE LAYOUT - FIXED: 5 columns with proper alignment */
       .course-header {
         display: grid;
-        /* Reduced width for first three columns by 10% */
         grid-template-columns: 0.9fr 0.9fr 0.9fr 1.1fr 44px;
         gap: 6px;
         margin-bottom: 8px;
@@ -473,7 +471,6 @@
         text-align: center;
       }
       
-      /* Show all headers on mobile */
       .course-header > div:nth-child(1),
       .course-header > div:nth-child(2),
       .course-header > div:nth-child(3),
@@ -488,7 +485,6 @@
       
       .course-row {
         display: grid;
-        /* Reduced width for first three columns by 10% */
         grid-template-columns: 0.9fr 0.9fr 0.9fr 1.1fr 44px;
         gap: 6px;
         margin-bottom: 12px;
@@ -500,7 +496,6 @@
         border: 1px solid rgba(231, 238, 252, 0.08);
       }
       
-      /* Show all columns on mobile */
       .course-row > *:nth-child(1),
       .course-row > *:nth-child(2),
       .course-row > *:nth-child(3),
@@ -509,30 +504,28 @@
         display: block;
       }
       
-      /* Arrange the grid items */
-      .course-row > *:nth-child(1) { /* Credits select */
+      .course-row > *:nth-child(1) {
         grid-column: 1;
         grid-row: 1;
       }
       
-      .course-row > *:nth-child(2) { /* Grade select */
+      .course-row > *:nth-child(2) {
         grid-column: 2;
         grid-row: 1;
       }
       
-      .course-row > *:nth-child(3) { /* Repeated? select */
+      .course-row > *:nth-child(3) {
         grid-column: 3;
         grid-row: 1;
         width: 100%;
       }
       
-      .course-row > *:nth-child(4) { /* Old Grade select */
+      .course-row > *:nth-child(4) {
         grid-column: 4;
         grid-row: 1;
         width: 100%;
       }
       
-      /* DELETE BUTTON */
       .course-row > *:nth-child(5) {
         grid-column: 5;
         grid-row: 1;
@@ -551,79 +544,71 @@
         transition: all 0.2s ease;
       }
       
-      /* Make all selects have consistent height and smaller font */
       .course-row select {
         height: 42px;
         padding: 8px 4px;
         font-size: 0.75rem;
       }
       
-      /* Make the selects more compact */
       .course-row .repeated-select,
       .course-row .old-grade-select {
         font-size: 0.7rem;
       }
       
-      /* FIXED: RTL ARABIC HEADING ALIGNMENT - Keep same layout but adjust text alignment */
       [dir="rtl"] .course-header {
-        /* Same grid layout with reduced widths */
         grid-template-columns: 0.9fr 0.9fr 0.9fr 1.1fr 44px;
       }
       
       [dir="rtl"] .course-row {
-        /* Same grid layout with reduced widths */
         grid-template-columns: 0.9fr 0.9fr 0.9fr 1.1fr 44px;
       }
       
-      /* CRITICAL FIX: All headers stay in same position, just centered text */
-      [dir="rtl"] .course-header > div:nth-child(1) { /* Credits header */
+      [dir="rtl"] .course-header > div:nth-child(1) {
         grid-column: 1;
         text-align: center;
       }
       
-      [dir="rtl"] .course-header > div:nth-child(2) { /* Grade header */
+      [dir="rtl"] .course-header > div:nth-child(2) {
         grid-column: 2;
         text-align: center;
       }
       
-      [dir="rtl"] .course-header > div:nth-child(3) { /* Repeated? header */
+      [dir="rtl"] .course-header > div:nth-child(3) {
         grid-column: 3;
         text-align: center;
       }
       
-      [dir="rtl"] .course-header > div:nth-child(4) { /* Old Grade header */
+      [dir="rtl"] .course-header > div:nth-child(4) {
         grid-column: 4;
         text-align: center;
       }
       
-      [dir="rtl"] .course-header > div:nth-child(5) { /* Empty for delete */
+      [dir="rtl"] .course-header > div:nth-child(5) {
         grid-column: 5;
         text-align: center;
         visibility: hidden;
       }
       
-      /* All inputs stay in same position */
-      [dir="rtl"] .course-row > *:nth-child(1) { /* Credits select stays in column 1 */
+      [dir="rtl"] .course-row > *:nth-child(1) {
         grid-column: 1;
       }
       
-      [dir="rtl"] .course-row > *:nth-child(2) { /* Grade select stays in column 2 */
+      [dir="rtl"] .course-row > *:nth-child(2) {
         grid-column: 2;
       }
       
-      [dir="rtl"] .course-row > *:nth-child(3) { /* Repeated? select stays in column 3 */
+      [dir="rtl"] .course-row > *:nth-child(3) {
         grid-column: 3;
       }
       
-      [dir="rtl"] .course-row > *:nth-child(4) { /* Old Grade select stays in column 4 */
+      [dir="rtl"] .course-row > *:nth-child(4) {
         grid-column: 4;
       }
       
-      [dir="rtl"] .course-row > *:nth-child(5) { /* Delete button stays in column 5 */
+      [dir="rtl"] .course-row > *:nth-child(5) {
         grid-column: 5;
       }
       
-      /* Ensure RTL selects have proper text alignment */
       [dir="rtl"] .course-row select {
         text-align: right;
         font-size: 0.75rem;
@@ -645,7 +630,6 @@
         font-size: 1.2rem;
       }
       
-      /* Mobile adjustments for grade badge */
       .grade-badge {
         font-size: 0.85rem;
         padding: 3px 10px;
@@ -677,7 +661,6 @@
         font-size: 0.9rem;
       }
       
-      /* Improve button tap targets for mobile */
       button {
         min-height: 48px;
       }
@@ -709,7 +692,6 @@
       }
       
       .course-header {
-        /* Further reduced for very small screens */
         grid-template-columns: 0.85fr 0.85fr 0.85fr 1.15fr 40px;
         gap: 4px;
         font-size: 0.65rem;
@@ -732,7 +714,6 @@
         font-size: 0.9rem;
       }
       
-      /* RTL adjustments for very small screens */
       [dir="rtl"] .course-header {
         grid-template-columns: 0.85fr 0.85fr 0.85fr 1.15fr 40px;
       }
@@ -752,7 +733,6 @@
     
     /* Special handling for tablets in portrait (601px - 900px) */
     @media (min-width: 601px) and (max-width: 900px) {
-      /* Tablet layout with 5 columns - FIXED to show all columns */
       .course-header {
         grid-template-columns: 1fr 1fr 1fr 1fr 44px;
         gap: 8px;
@@ -797,7 +777,6 @@
         height: 44px;
       }
       
-      /* RTL for tablet - FIXED */
       [dir="rtl"] .course-header {
         grid-template-columns: 1fr 1fr 1fr 1fr 44px;
         text-align: center;
@@ -951,12 +930,10 @@
         <!-- Tips Box -->
         <div class="tipbox">
           <h3 id="tTipsTitle">Tips</h3>
-          <ul>
-            <li id="tTip1">Enter your completed hours before this semester. The tool adds this semester hours automatically.</li>
-            <li id="tTip2">If you repeated courses, mark them and select the old grade that will be replaced.</li>
-            <li id="tTip3">Use your official study plan for total credit hours.</li>
-            <li id="tTip4">GPA values are rounded to 2 decimals like university reports.</li>
-            <li id="tTip5">"Highest possible GPA" assumes 4.00 in all remaining hours.</li>
+          <ul>     
+            <li id="tTip1">If you repeated courses, mark them and select the old grade that will be replaced.</li>
+            <li id="tTip2">GPA values are rounded to 2 decimals like university reports.</li>
+            <li id="tTip3">"Highest possible GPA" assumes 4.00 in all remaining hours.</li>
           </ul>
         </div>
       </section>
@@ -1009,11 +986,9 @@
         aimHintChoose: "Choose the grade you want to reach by graduation.",
 
         tipsTitle: "Tips",
-        tip1: "Enter your cumulative hours before this semester. The tool adds this semester hours automatically.",
-        tip2: "If you repeated courses, mark them and select the old grade that will be replaced.",
-        tip3: "Use your official study plan for total credit hours.",
-        tip4: "GPA values are rounded to 2 decimals like university reports.",
-        tip5: "'Highest possible GPA' assumes 4.00 in all remaining hours.",
+        tip1: "If you repeated courses, mark them and select the old grade that will be replaced.",
+        tip2: "GPA values are rounded to 2 decimals like university reports.",
+        tip3: "'Highest possible GPA' assumes 4.00 in all remaining hours.",
 
         msgInvalid: "Invalid entry. Please check all fields.",
         msgHoursTooHigh: "Total hours exceed major requirement. Please check inputs.",
@@ -1084,11 +1059,9 @@
         aimHintChoose: "اختر التقدير الذي تريد الوصول له عند التخرج.",
 
         tipsTitle: "نصائح",
-        tip1: "أدخل الساعات التراكمية قبل هذا الفصل. الأداة تضيف ساعات هذا الفصل تلقائياً.",
-        tip2: "إذا لديك مواد مُعادة: حددها واختر العلامة القديمة التي سيتم استبدالها.",
-        tip3: "استخدم خطتك الدراسية الرسمية لإجمالي الساعات.",
-        tip4: "يتم عرض المعدل مقرباً إلى منزلتين عشريتين مثل أغلب التقارير.",
-        tip5: "'أعلى معدل ممكن' يفترض 4.00 في كل الساعات المتبقية.",
+        tip1: "إذا لديك مواد مُعادة: حددها واختر العلامة القديمة التي سيتم استبدالها.",
+        tip2: "يتم عرض المعدل مقرباً إلى منزلتين عشريتين مثل أغلب التقارير.",
+        tip3: "'أعلى معدل ممكن' يفترض 4.00 في كل الساعات المتبقية.",
 
         msgInvalid: "إدخال غير صالح. يرجى مراجعة جميع الحقول.",
         msgHoursTooHigh: "إجمالي الساعات يتجاوز متطلبات التخصص. يرجى مراجعة المدخلات.",
@@ -1121,7 +1094,13 @@
       }
     };
 
+    // ====== GLOBAL STATE FOR LANGUAGE PERSISTENCE ======
     let currentLang = "en";
+    let currentGradeKey = null;          // last computed grade key
+    let currentMessageKey = null;        // last displayed message key (e.g., "msgSuccess")
+    let currentMessageError = false;     // error state of the message
+    let currentAimState = null;          // last state for target section (GPA, N, T, R, h0)
+    let currentAimChoice = null;         // last selected target value (e.g., "GOOD_A")
 
     // ====== GRADE TABLE ======
     const gradePoints = new Map([
@@ -1140,6 +1119,7 @@
     ]);
 
     const gradeOptions = Array.from(gradePoints.keys());
+    const oldGradeOptions = ["C+", "C", "C-", "D+", "D", "D-", "F"];
 
     // ====== UTILITY FUNCTIONS ======
     const el = (id) => document.getElementById(id);
@@ -1151,7 +1131,7 @@
       document.documentElement.lang = currentLang;
       document.body.dir = (currentLang === "ar") ? "rtl" : "ltr";
 
-      // Update all text elements
+      // Update all static text elements
       el("tTitle").textContent = t.title;
       el("tSubtitle").textContent = t.subtitle;
       el("tLangLabel").textContent = t.langLabel;
@@ -1183,10 +1163,8 @@
       el("tTip1").textContent = t.tip1;
       el("tTip2").textContent = t.tip2;
       el("tTip3").textContent = t.tip3;
-      el("tTip4").textContent = t.tip4;
-      el("tTip5").textContent = t.tip5;
 
-      // Update footer text based on language
+      // Update footer
       const footer = document.querySelector('.site-footer');
       if (footer) {
         footer.textContent = currentLang === "ar" 
@@ -1194,12 +1172,34 @@
           : "Crafted with precision by Eng. Abdullah Abu Qaoud";
       }
 
-      // Update course rows if they exist
+      // Update "Repeated?" dropdowns (preserve selection)
       updateCourseRowTexts();
 
-      // Update aim UI if results are visible
-      if (el("resultsBox").style.display !== "none" && window.__lastState) {
-        setupAimUI(window.__lastState);
+      // Update grade badge if results are visible
+      if (currentGradeKey && el("resultsBox").style.display !== "none") {
+        const gradeElement = el("outGrade");
+        gradeElement.textContent = t.grade[currentGradeKey];
+      }
+
+      // Update the main message if one is displayed
+      if (currentMessageKey) {
+        const newText = t[currentMessageKey];
+        if (newText) {
+          const box = el("message");
+          box.style.display = "block";
+          box.textContent = newText;
+          box.className = "message-box " + (currentMessageError ? "error" : "success");
+        }
+      }
+
+      // Update target dropdown and advice if results are visible
+      if (el("resultsBox").style.display !== "none" && currentAimState) {
+        // Rebuild the options with translated labels
+        buildAimOptions(currentAimState);
+        // If a target was selected, re-generate the advice
+        if (currentAimChoice) {
+          generateAdvice(currentAimChoice, currentAimState);
+        }
       }
 
       localStorage.setItem("lang", currentLang);
@@ -1209,26 +1209,40 @@
       const t = I18N[currentLang];
       const selects = document.querySelectorAll('.course-row select');
       
-      // Update "Repeated?" select options
-      selects.forEach((select, index) => {
+      selects.forEach((select) => {
         if (select.classList.contains('repeated-select')) {
+          const currentValue = select.value;
           select.innerHTML = `
             <option value="No">${t.no}</option>
             <option value="Yes">${t.yes}</option>
           `;
+          if (currentValue === "Yes") {
+            select.value = "Yes";
+          }
+          select.dispatchEvent(new Event('change'));
         }
       });
     }
 
-    function showMessage(text, isError) {
+    // ====== MESSAGE FUNCTIONS ======
+    function showMessage(key, isError) {
+      const t = I18N[currentLang];
+      const text = t[key];
+      if (!text) return;
+
       const box = el("message");
       box.style.display = "block";
       box.textContent = text;
       box.className = "message-box " + (isError ? "error" : "success");
+
+      currentMessageKey = key;
+      currentMessageError = isError;
     }
 
     function clearMessage() {
       el("message").style.display = "none";
+      currentMessageKey = null;
+      currentMessageError = false;
     }
 
     // ====== COURSE MANAGEMENT ======
@@ -1253,12 +1267,11 @@
             <option value="Yes">${t.yes}</option>
           </select>
           <select class="old-grade-select" style="opacity: 0.6">
-            ${gradeOptions.map(g => `<option value="${g}">${g}</option>`).join('')}
+            ${oldGradeOptions.map(g => `<option value="${g}">${g}</option>`).join('')}
           </select>
           <button class="danger" onclick="this.parentElement.remove()">×</button>
         `;
         
-        // Add event listener for repeated toggle
         const repeatedSelect = row.querySelector('.repeated-select');
         const oldGradeSelect = row.querySelector('.old-grade-select');
         
@@ -1267,9 +1280,7 @@
           oldGradeSelect.disabled = this.value !== 'Yes';
         });
         
-        // Initialize old grade as disabled
         oldGradeSelect.disabled = true;
-        
         container.appendChild(row);
       }
     }
@@ -1291,21 +1302,18 @@
       clearMessage();
       const t = I18N[currentLang];
 
-      // Get basic inputs
       const h0 = parseInt(el("h0").value);
       const h = parseInt(el("h").value);
       const s = parseFloat(el("s").value);
 
-      // Validate basic inputs
       if (!h0 || h0 < 0 || h < 0 || s < 0 || s > 4 || isNaN(s)) {
-        showMessage(t.msgInvalid, true);
+        showMessage('msgInvalid', true);
         return;
       }
 
-      // Get all courses
       const courseRows = document.querySelectorAll('.course-row');
       if (courseRows.length === 0) {
-        showMessage(t.msgInvalid, true);
+        showMessage('msgInvalid', true);
         return;
       }
 
@@ -1314,46 +1322,36 @@
       let totalOldPoints = 0;
       let totalOldHours = 0;
 
-      // Process each course
       courseRows.forEach(row => {
         const credits = parseInt(row.querySelector('.credits-select').value);
         const grade = row.querySelector('.grade-select').value;
         const isRepeated = row.querySelector('.repeated-select').value === 'Yes';
         const oldGrade = row.querySelector('.old-grade-select').value;
 
-        // Add semester hours and points
         totalSemesterHours += credits;
         totalSemesterPoints += credits * score(grade);
 
-        // If repeated, subtract old grade points
         if (isRepeated) {
           totalOldPoints += credits * score(oldGrade);
           totalOldHours += credits;
         }
       });
 
-      // Calculate total completed hours (old hours are subtracted because they're replaced)
       const T = h + totalSemesterHours - totalOldHours;
       
       if (T <= 0) {
-        showMessage(t.msgInvalid, true);
+        showMessage('msgInvalid', true);
         return;
       }
 
-      // Calculate cumulative points
       const N = h * s + totalSemesterPoints - totalOldPoints;
-
-      // Calculate GPAs
       const GPA = round2(N / T);
       const GPA0 = round2(totalSemesterPoints / totalSemesterHours);
       const R = h0 - T;
-
-      // Calculate highest possible GPA (assuming 4.00 in remaining hours)
       const GPAHi = round2((N + 4.00 * R) / h0);
 
-      // Check if hours exceed major requirement
       if (T > h0) {
-        showMessage(t.msgHoursTooHigh, true);
+        showMessage('msgHoursTooHigh', true);
         return;
       }
 
@@ -1383,63 +1381,67 @@
         gradeClass = "acceptable";
       }
       
+      currentGradeKey = gradeKey;
+
       const gradeElement = el("outGrade");
       gradeElement.textContent = t.grade[gradeKey];
-      
-      // Remove all grade classes first
       gradeElement.classList.remove("excellent", "verygood", "good", "acceptable", "weak");
-      
-      // Add the appropriate grade class
       gradeElement.classList.add(gradeClass);
 
-      // Store state for aim UI
+      // Store state for target UI
       const state = { GPA, N, T, R, h0 };
       window.__lastState = state;
-      
-      // Setup aim UI
+      currentAimState = state;
+      currentAimChoice = null;   // reset target selection
+
+      // Setup target UI
       setupAimUI(state);
       
-      showMessage(t.msgSuccess, false);
+      showMessage('msgSuccess', false);
     }
 
     // ====== AIM/TARGET UI ======
     function setupAimUI(state) {
-      const t = I18N[currentLang];
       const aimSection = el("aimSection");
       const aimSelect = el("aimSelect");
-      const aimHint = el("aimHint");
       const adviceBox = el("adviceBox");
-      const adviceText = el("adviceText");
-
-      aimSelect.innerHTML = "";
       adviceBox.style.display = "none";
-      aimHint.textContent = "";
 
-      const GPA = state.GPA;
-
-      // Hide aim section for excellent students
-      if (GPA >= 3.65) {
+      if (state.GPA >= 3.65) {
         aimSection.style.display = "none";
+        currentAimState = null;
+        currentAimChoice = null;
         return;
       }
 
       aimSection.style.display = "block";
+      buildAimOptions(state);
+      // Reset any previous advice
+      el("adviceText").textContent = "";
+    }
+
+    function buildAimOptions(state) {
+      const t = I18N[currentLang];
+      const aimSelect = el("aimSelect");
+      const aimHint = el("aimHint");
+      const GPA = state.GPA;
 
       let options = [];
+      let hintKey = "";
 
       if (GPA >= 3.00 && GPA <= 3.64) {
         options = [
           { value: "", label: t.aim.select },
           { value: "EXCELLENT_Y", label: t.aim.yesWantExcellent },
         ];
-        aimHint.textContent = t.aimHintVeryGood;
+        hintKey = "aimHintVeryGood";
       } else if (GPA >= 2.50 && GPA <= 2.99) {
         options = [
           { value: "", label: t.aim.select },
           { value: "GOOD_A", label: t.aim.veryGood },
           { value: "GOOD_B", label: t.aim.excellent }
         ];
-        aimHint.textContent = t.aimHintChoose;
+        hintKey = "aimHintChoose";
       } else if (GPA >= 2.00 && GPA <= 2.49) {
         options = [
           { value: "", label: t.aim.select },
@@ -1447,7 +1449,7 @@
           { value: "ACC_B", label: t.aim.veryGood },
           { value: "ACC_C", label: t.aim.excellent }
         ];
-        aimHint.textContent = t.aimHintChoose;
+        hintKey = "aimHintChoose";
       } else {
         options = [
           { value: "", label: t.aim.select },
@@ -1456,117 +1458,135 @@
           { value: "WEAK_C", label: t.aim.veryGood },
           { value: "WEAK_D", label: t.aim.excellent }
         ];
-        aimHint.textContent = t.aimHintChoose;
+        hintKey = "aimHintChoose";
       }
 
+      // Preserve current selection if it exists and is still valid
+      const currentValue = aimSelect.value;
+      aimSelect.innerHTML = "";
       for (const opt of options) {
         const o = document.createElement("option");
         o.value = opt.value;
         o.textContent = opt.label;
         aimSelect.appendChild(o);
       }
+      if (currentValue && options.some(o => o.value === currentValue)) {
+        aimSelect.value = currentValue;
+      } else {
+        aimSelect.value = "";
+        // If selection is cleared, also clear advice
+        el("adviceBox").style.display = "none";
+        currentAimChoice = null;
+      }
 
-      aimSelect.onchange = () => {
-        adviceBox.style.display = "none";
+      aimHint.textContent = t[hintKey] || "";
 
-        const choice = aimSelect.value;
-        if (!choice) return;
-
-        if (!(state.R > 0)) {
-          adviceText.textContent = t.msgRemainMust;
-          adviceBox.className = "advice-box error";
-          adviceBox.style.display = "block";
-          return;
-        }
-
-        const targets = {
-          ACCEPTABLE: 2.01,
-          GOOD: 2.51,
-          VERY_GOOD: 3.01,
-          EXCELLENT: 3.66
-        };
-
-        let target = null;
-
-        if (choice === "EXCELLENT_Y") target = targets.EXCELLENT;
-        if (choice === "GOOD_A") target = targets.VERY_GOOD;
-        if (choice === "GOOD_B") target = targets.EXCELLENT;
-        if (choice === "ACC_A") target = targets.GOOD;
-        if (choice === "ACC_B") target = targets.VERY_GOOD;
-        if (choice === "ACC_C") target = targets.EXCELLENT;
-        if (choice === "WEAK_A") target = targets.ACCEPTABLE;
-        if (choice === "WEAK_B") target = targets.GOOD;
-        if (choice === "WEAK_C") target = targets.VERY_GOOD;
-        if (choice === "WEAK_D") target = targets.EXCELLENT;
-
-        let N = state.N;
-        const T = state.T;
-        const R = state.R;
-        const h0 = state.h0;
-
-        let requiredGPA = (target * h0 - N) / R;
-
-        if (requiredGPA > 4.00) {
-          // Need to repeat courses to raise GPA first
-          const extraPoints = (requiredGPA - 4.00) * R;
-          N += extraPoints;
-          const newGPA = N / T;
-          
-          const newRequiredGPA = (target * h0 - N) / R;
-          
-          adviceText.textContent =
-            t.msgNeedRepeat + "\n" +
-            t.msgRaiseTo + fmt2(newGPA) + "\n" +
-            t.msgThenKeep + fmt2(newRequiredGPA);
+      // Attach onchange handler (only once)
+      aimSelect.onchange = function() {
+        const choice = this.value;
+        currentAimChoice = choice || null;
+        if (choice) {
+          generateAdvice(choice, state);
         } else {
-          adviceText.textContent = t.msgKeep + fmt2(requiredGPA);
+          el("adviceBox").style.display = "none";
         }
-
-        adviceBox.className = "advice-box";
-        adviceBox.style.display = "block";
       };
+    }
+
+    function generateAdvice(choice, state) {
+      const t = I18N[currentLang];
+      const adviceText = el("adviceText");
+      const adviceBox = el("adviceBox");
+
+      if (!choice) {
+        adviceBox.style.display = "none";
+        return;
+      }
+
+      if (!(state.R > 0)) {
+        adviceText.textContent = t.msgRemainMust;
+        adviceBox.className = "advice-box error";
+        adviceBox.style.display = "block";
+        return;
+      }
+
+      const targets = {
+        ACCEPTABLE: 2.00,
+        GOOD: 2.50,
+        VERY_GOOD: 3.00,
+        EXCELLENT: 3.65
+      };
+
+      let target = null;
+      if (choice === "EXCELLENT_Y") target = targets.EXCELLENT;
+      else if (choice === "GOOD_A") target = targets.VERY_GOOD;
+      else if (choice === "GOOD_B") target = targets.EXCELLENT;
+      else if (choice === "ACC_A") target = targets.GOOD;
+      else if (choice === "ACC_B") target = targets.VERY_GOOD;
+      else if (choice === "ACC_C") target = targets.EXCELLENT;
+      else if (choice === "WEAK_A") target = targets.ACCEPTABLE;
+      else if (choice === "WEAK_B") target = targets.GOOD;
+      else if (choice === "WEAK_C") target = targets.VERY_GOOD;
+      else if (choice === "WEAK_D") target = targets.EXCELLENT;
+
+      if (target === null) return;
+
+      let N = state.N;
+      const T = state.T;
+      const R = state.R;
+      const h0 = state.h0;
+
+      let requiredGPA = (target * h0 - N) / R;
+
+      if (requiredGPA > 4.00) {
+        const extraPoints = (requiredGPA - 4.00) * R;
+        N += extraPoints;
+        const newGPA = N / T;
+        const newRequiredGPA = (target * h0 - N) / R;
+        adviceText.textContent =
+          t.msgNeedRepeat + "\n" +
+          t.msgRaiseTo + fmt2(newGPA) + "\n" +
+          t.msgThenKeep + fmt2(newRequiredGPA);
+      } else {
+        adviceText.textContent = t.msgKeep + fmt2(requiredGPA);
+      }
+
+      adviceBox.className = "advice-box";
+      adviceBox.style.display = "block";
     }
 
     // ====== RESET FUNCTION ======
     function resetAll() {
       clearMessage();
       
-      // Reset inputs
       ["h0", "h", "s"].forEach(id => el(id).value = "");
-      
-      // Clear course list
       el("courseList").innerHTML = "";
-      
-      // Hide results
       el("resultsBox").style.display = "none";
       el("aimSection").style.display = "none";
       el("adviceBox").style.display = "none";
       
-      // Reset grade badge to default
       const gradeElement = el("outGrade");
       gradeElement.classList.remove("excellent", "verygood", "good", "acceptable", "weak");
       gradeElement.textContent = "—";
       
-      // Add default courses
+      currentGradeKey = null;
+      currentAimState = null;
+      currentAimChoice = null;
+      
       addCourse(3);
     }
 
     // ====== INITIALIZATION ======
     function init() {
-      // Initialize language
       const savedLang = localStorage.getItem("lang") || 
                        (navigator.language.toLowerCase().startsWith("ar") ? "ar" : "en");
       el("lang").value = savedLang;
       setLang(savedLang);
       
-      // Add initial courses
       addCourse(3);
-      
-      // Add event listeners
       el("lang").addEventListener("change", (e) => setLang(e.target.value));
     }
 
-    // Initialize when page loads
     window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
